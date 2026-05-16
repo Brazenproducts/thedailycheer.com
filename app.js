@@ -20,17 +20,13 @@ function animateCount(el, target, suffix = '') {
 }
 
 function initStats() {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      animateCount(document.getElementById('storiesCount'), 4820);
-      animateCount(document.getElementById('smilesCount'), 183000);
-      animateCount(document.getElementById('daysCount'), 847);
-      observer.disconnect();
-    });
-  }, { threshold: 0.3 });
-  const hero = document.querySelector('.hero');
-  if (hero) observer.observe(hero);
+  function runCounters() {
+    animateCount(document.getElementById('storiesCount'), 4820);
+    animateCount(document.getElementById('smilesCount'), 183000);
+    animateCount(document.getElementById('daysCount'), 847);
+  }
+  // Run after a short delay so page has rendered
+  setTimeout(runCounters, 400);
 }
 
 /* ---------- Ticker Duplication (seamless loop) ---------- */
