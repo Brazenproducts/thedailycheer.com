@@ -50,7 +50,7 @@ function initSmileButtons() {
       btn.setAttribute('aria-pressed', 'true');
     }
 
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', async () => {
       if (smileData[id]) return; // already smiled
       smileData[id] = true;
       localStorage.setItem('tdc-smiles', JSON.stringify(smileData));
@@ -256,9 +256,9 @@ function initChillZone() {
   let audioCtx = null;
   const playing = {}; // soundType -> {source, gainNode, ...}
 
-  function getCtx() {
+  async function getCtx() {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
+    if (audioCtx.state === 'suspended') await audioCtx.resume();
     return audioCtx;
   }
 
@@ -282,8 +282,8 @@ function initChillZone() {
     return buf;
   }
 
-  function startSound(type) {
-    const ctx = getCtx();
+  async function startSound(type) {
+    const ctx = await getCtx();
     const gainNode = ctx.createGain();
     gainNode.gain.value = 0.55;
     gainNode.connect(ctx.destination);
@@ -338,14 +338,31 @@ function initChillZone() {
     delete playing[type];
   }
 
+  // Stream card click handler - load YouTube in iframe
+  document.querySelectorAll('.stream-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const ytId = card.dataset.yt;
+      if (!ytId) return;
+      const player = document.getElementById('ytPlayer');
+      const frame = document.getElementById('ytFrame');
+      if (!player || !frame) return;
+      // Mark active card
+      document.querySelectorAll('.stream-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      // Load the iframe
+      frame.src = `https://www.youtube.com/embed/${ytId}?autoplay=1`;
+      player.style.display = 'block';
+    });
+  });
+
   document.querySelectorAll('.nb').forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', async () => {
       const type = btn.dataset.sound;
       if (btn.classList.contains('playing')) {
         stopSound(type);
         btn.classList.remove('playing');
       } else {
-        startSound(type);
+        await startSound(type);
         btn.classList.add('playing');
       }
     });

@@ -457,3 +457,16 @@ cite { font-size: .95rem; color: var(--text-2); font-style: normal; }
 .stream-link:active { background: var(--yellow-lt); border-color: var(--yellow); }
 .zl-link { background: var(--yellow-lt); border-color: var(--yellow); }
 /* ===== END ZEN LOFI WIDGET ===== */
+
+/* Stream cards */
+.stream-cards { display: flex; flex-direction: column; gap: 8px; }
+.stream-card {
+  padding: 14px 16px; border-radius: 12px;
+  border: 2px solid #e5e7eb; background: #f9fafb;
+  font-size: .92rem; font-weight: 600; color: #1a1a1a;
+  cursor: pointer; transition: all .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.stream-card:active, .stream-card.active {
+  background: var(--yellow-lt); border-color: var(--yellow);
+}

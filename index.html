@@ -357,23 +357,26 @@
 
       <!-- Lo-fi: direct YouTube link (iframes blocked on iOS) -->
       <div class="chill-pane" id="tabLofi">
-        <p class="chill-hint">Opens YouTube in a new tab — keeps playing while you browse</p>
-        <div class="stream-links">
-          <a href="https://www.youtube.com/watch?v=jfKfPfyJRdk" target="_blank" class="stream-link">🎵 Lo-fi Girl 24/7 Live</a>
-          <a href="https://www.youtube.com/watch?v=5qap5aO4i9A" target="_blank" class="stream-link">📚 Chill Study Beats</a>
-          <a href="https://www.youtube.com/watch?v=DWcJFNfaw9c" target="_blank" class="stream-link">🎹 Lo-fi Hip Hop Radio</a>
-          <a href="https://www.youtube.com/watch?v=lTRiuFIWV54" target="_blank" class="stream-link">🌙 Late Night Lo-fi</a>
+        <p class="chill-hint">Tap a stream card to load it · then tap ▶ play</p>
+        <div class="stream-cards">
+          <div class="stream-card" data-yt="jfKfPfyJRdk">🎵 Lo-fi Girl 24/7</div>
+          <div class="stream-card" data-yt="5qap5aO4i9A">📚 Chill Study Beats</div>
+          <div class="stream-card" data-yt="DWcJFNfaw9c">🎹 Lo-fi Beats Radio</div>
+        </div>
+        <div id="ytPlayer" style="margin-top:10px;display:none;">
+          <iframe id="ytFrame" width="100%" height="120" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen style="border-radius:12px;"></iframe>
         </div>
       </div>
 
       <!-- External streams -->
       <div class="chill-pane" id="tabLinks">
-        <p class="chill-hint">Opens in new tab — full tracks, free</p>
-        <div class="stream-links">
-          <a href="https://www.youtube.com/playlist?list=PLofht4PTcKYnaH8w5olJCI-wUNpMiCQBp" target="_blank" class="stream-link">🎶 Chill Vibes Playlist</a>
-          <a href="https://soundcloud.com/search?q=lofi+chill&filter.duration=epic" target="_blank" class="stream-link">☁️ SoundCloud Lo-fi</a>
-          <a href="https://zenlofi.com" target="_blank" class="stream-link zl-link">🌟 Full Experience → ZenLofi.com</a>
-        </div>
+        <p class="chill-hint">SoundCloud — full tracks, no login</p>
+        <iframe width="100%" height="166" scrolling="no" frameborder="no"
+          src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/lo-fi-hip-hop-music/sets/lofi-hip-hop&color=%23a78bfa&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"
+          style="border-radius:12px;"></iframe>
+        <a href="https://zenlofi.com" target="_blank" class="stream-link zl-link" style="margin-top:10px;display:block;">🌟 Full Zen Lofi Experience →</a>
       </div>
 
     </div>
