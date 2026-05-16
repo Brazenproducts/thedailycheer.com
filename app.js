@@ -233,6 +233,137 @@ function initScrollReveal() {
   });
 }
 
+/* ---------- Chill Zone Widget ---------- */
+function initChillZone() {
+  const trigger   = document.getElementById('chillTrigger');
+  const panel     = document.getElementById('chillPanel');
+  const closeBtn  = document.getElementById('chillClose');
+  const tabs      = document.querySelectorAll('.chill-tab');
+  const panes     = document.querySelectorAll('.chill-pane');
+  if (!trigger || !panel) return;
+
+  // Lazy-load flags — don't inject iframes until the tab is first opened
+  let lofiLoaded    = false;
+  let spotifyLoaded = false;
+
+  // Active audio tracking
+  let activeAudio = null;     // HTMLAudioElement currently playing
+  let activeNatureBtn = null; // .nature-btn element currently active
+
+  /* --- helpers --- */
+  function stopNatureAudio() {
+    if (activeAudio) {
+      activeAudio.pause();
+      activeAudio.currentTime = 0;
+    }
+    if (activeNatureBtn) {
+      activeNatureBtn.classList.remove('playing');
+      activeNatureBtn.querySelector('.nb-indicator').textContent = '▶';
+    }
+    activeAudio = null;
+    activeNatureBtn = null;
+  }
+
+  function clearYouTube() {
+    const iframe = document.getElementById('lofiFrame');
+    if (iframe && lofiLoaded) {
+      // Reset src to stop playback without destroying the element
+      const src = iframe.dataset.src;
+      iframe.src = src; // reloads frame, stopping audio
+    }
+  }
+
+  function clearSpotify() {
+    const iframe = document.getElementById('spotifyFrame');
+    if (iframe && spotifyLoaded) {
+      const src = iframe.dataset.src;
+      iframe.src = src;
+    }
+  }
+
+  function activateTab(targetTab) {
+    tabs.forEach(t => t.classList.toggle('active', t === targetTab));
+    const id = targetTab.dataset.tab;
+    panes.forEach(p => p.classList.toggle('active', p.id === id));
+
+    // Stop other media when switching away from nature tab
+    if (id !== 'chillNature') stopNatureAudio();
+    if (id !== 'chillLofi')   clearYouTube();
+    if (id !== 'chillSpotify') clearSpotify();
+
+    // Lazy-load iframes
+    if (id === 'chillLofi' && !lofiLoaded) {
+      const iframe = document.getElementById('lofiFrame');
+      if (iframe) { iframe.src = iframe.dataset.src; lofiLoaded = true; }
+    }
+    if (id === 'chillSpotify' && !spotifyLoaded) {
+      const iframe = document.getElementById('spotifyFrame');
+      if (iframe) { iframe.src = iframe.dataset.src; spotifyLoaded = true; }
+    }
+  }
+
+  /* --- open / close --- */
+  function openPanel() {
+    panel.classList.add('open');
+    trigger.setAttribute('aria-expanded', 'true');
+    trigger.textContent = '🎵';
+  }
+
+  function closePanel() {
+    panel.classList.remove('open');
+    trigger.setAttribute('aria-expanded', 'false');
+    // Stop all audio
+    stopNatureAudio();
+    clearYouTube();
+    clearSpotify();
+  }
+
+  trigger.addEventListener('click', () => {
+    panel.classList.contains('open') ? closePanel() : openPanel();
+  });
+  closeBtn.addEventListener('click', closePanel);
+
+  // Close on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && panel.classList.contains('open')) closePanel();
+  });
+
+  /* --- tab switching --- */
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => activateTab(tab));
+  });
+
+  /* --- nature sounds --- */
+  document.querySelectorAll('.nature-btn').forEach(btn => {
+    const src = btn.dataset.src;
+    btn.addEventListener('click', () => {
+      if (activeNatureBtn === btn) {
+        // Clicking same button → toggle pause/play
+        if (activeAudio.paused) {
+          activeAudio.play();
+          btn.classList.add('playing');
+          btn.querySelector('.nb-indicator').textContent = '⏸';
+        } else {
+          activeAudio.pause();
+          btn.classList.remove('playing');
+          btn.querySelector('.nb-indicator').textContent = '▶';
+        }
+      } else {
+        // Stop anything playing, start new track
+        stopNatureAudio();
+        const audio = new Audio(src);
+        audio.loop = true;
+        audio.volume = 0.6;
+        audio.play().catch(() => {}); // silent catch for autoplay policy
+        btn.classList.add('playing');
+        btn.querySelector('.nb-indicator').textContent = '⏸';
+        activeAudio = audio;
+        activeNatureBtn = btn;
+      }
+    });
+  });
+}
+
 /* ---------- Init ---------- */
 document.addEventListener('DOMContentLoaded', () => {
   initStats();
@@ -245,4 +376,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initLoadMore();
   initFooterYear();
   initScrollReveal();
+  initChillZone();
 });

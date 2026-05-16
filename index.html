@@ -325,6 +325,80 @@
     </div>
   </footer>
 
+  <!-- ===== CHILL ZONE WIDGET ===== -->
+  <!-- Floating trigger -->
+  <button class="chill-trigger" id="chillTrigger" aria-label="Open Chill Zone music player" aria-expanded="false" aria-controls="chillPanel">
+    🎵
+  </button>
+
+  <!-- Panel -->
+  <div class="chill-panel" id="chillPanel" role="region" aria-label="Chill Zone music player">
+    <div class="chill-header">
+      <span class="chill-title">🎵 Chill Zone</span>
+      <button class="chill-close" id="chillClose" aria-label="Close Chill Zone">✕</button>
+    </div>
+
+    <!-- Tab pills -->
+    <div class="chill-tabs" role="tablist" aria-label="Chill Zone tabs">
+      <button class="chill-tab active" role="tab" aria-selected="true"  aria-controls="chillLofi"    data-tab="chillLofi">🎧 Lo-fi</button>
+      <button class="chill-tab"        role="tab" aria-selected="false" aria-controls="chillNature"  data-tab="chillNature">🌿 Nature</button>
+      <button class="chill-tab"        role="tab" aria-selected="false" aria-controls="chillSpotify" data-tab="chillSpotify">🎶 Playlist</button>
+    </div>
+
+    <!-- Tab bodies -->
+    <div class="chill-body">
+
+      <!-- Tab 1: Lo-fi Beats -->
+      <div class="chill-pane active" id="chillLofi" role="tabpanel">
+        <iframe
+          id="lofiFrame"
+          width="100%" height="80"
+          data-src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=0"
+          src="about:blank"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+          title="Lo-fi Girl 24/7 live stream"
+          loading="lazy"
+        ></iframe>
+      </div>
+
+      <!-- Tab 2: Nature Sounds -->
+      <div class="chill-pane" id="chillNature" role="tabpanel">
+        <div class="nature-btns">
+          <button class="nature-btn" data-src="https://www.soundjay.com/misc/sounds/rain-01.mp3" aria-label="Play rain sounds">
+            🌧️ Rain
+            <span class="nb-indicator" aria-hidden="true">▶</span>
+          </button>
+          <button class="nature-btn" data-src="https://www.soundjay.com/misc/sounds/ocean-wave-1.mp3" aria-label="Play ocean sounds">
+            🌊 Ocean
+            <span class="nb-indicator" aria-hidden="true">▶</span>
+          </button>
+          <button class="nature-btn" data-src="https://www.soundjay.com/misc/sounds/birds-singing-1.mp3" aria-label="Play forest sounds">
+            🌿 Forest
+            <span class="nb-indicator" aria-hidden="true">▶</span>
+          </button>
+        </div>
+        <p class="nature-hint">Click again to pause · loops forever</p>
+      </div>
+
+      <!-- Tab 3: Feel Good Playlist -->
+      <div class="chill-pane" id="chillSpotify" role="tabpanel">
+        <iframe
+          id="spotifyFrame"
+          src="about:blank"
+          data-src="https://open.spotify.com/embed/playlist/37i9dQZF1DXdPec7aLTmlC"
+          width="100%" height="80"
+          frameborder="0"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          title="Spotify Happy Hits playlist"
+          loading="lazy"
+        ></iframe>
+      </div>
+
+    </div><!-- /chill-body -->
+  </div><!-- /chill-panel -->
+
   <script src="app.js"></script>
 </body>
 </html>
