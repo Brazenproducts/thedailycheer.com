@@ -16,7 +16,7 @@ function renderStories(stories) {
     var catLabel = (s.category || 'good-news').replace(/-/g,' ').replace(/\w/g, function(c){return c.toUpperCase();});
     var smiles = s.smileCount || Math.floor(Math.random()*800 + 50);
 
-    html += '<article class="' + classes + '" data-category="' + (s.category||'good-news') + '">' +
+    html += '<article class="' + classes + '" data-category="' + (s.category||'good-news') + '" style="cursor:pointer;" onclick="window.open(\'' + s.link + '\',\'_blank\',\'noopener\')">' +
       badge +
       '<div class="card-media">' +
         '<img src="' + s.imageUrl + '" alt="' + (s.imageAlt||'') + '" loading="lazy" ' +
@@ -25,7 +25,7 @@ function renderStories(stories) {
       '</div>' +
       '<div class="card-body">' +
         '<span class="card-tag">' + catLabel + '</span>' +
-        '<h3><a href="' + s.link + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">' + s.title + '</a></h3>' +
+        '<h3><a href="' + s.link + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;" onclick="event.stopPropagation()">' + s.title + '</a></h3>' +
         (s.description ? '<p>' + s.description.slice(0,160) + (s.description.length>160?'…':'') + '</p>' : '') +
         '<div class="card-footer">' +
           '<span class="card-source" style="font-size:.78rem;color:#999;">' + s.source + '</span>' +
