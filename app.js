@@ -234,11 +234,36 @@ function initChillZone() {
   var trigger  = document.getElementById('chillTrigger');
   var panel    = document.getElementById('chillPanel');
   var closeBtn = document.getElementById('chillClose');
+  var npBar    = document.getElementById('nowPlayingBar');
+  var npLabel  = document.getElementById('nowPlayingLabel');
+  var npStop   = document.getElementById('nowPlayingStop');
+  var npOpen   = document.getElementById('nowPlayingOpen');
   if (!trigger || !panel) return;
 
+  // Open / close panel
   trigger.addEventListener('click', function() { panel.classList.toggle('open'); });
   closeBtn.addEventListener('click', function() { panel.classList.remove('open'); });
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape') panel.classList.remove('open'); });
+
+  // Now Playing bar helpers
+  function showNowPlaying(label) {
+    if (!npBar) return;
+    npBar.style.display = 'flex';
+    if (npLabel) npLabel.textContent = label;
+    // Push page content up so bar doesn't cover it
+    document.body.style.paddingBottom = '48px';
+    // Push chill trigger up too
+    if (trigger) trigger.style.bottom = '72px';
+  }
+  function hideNowPlaying() {
+    if (!npBar) return;
+    npBar.style.display = 'none';
+    document.body.style.paddingBottom = '';
+    if (trigger) trigger.style.bottom = '';
+  }
+
+  if (npStop) npStop.addEventListener('click', function() { stopAll(); hideNowPlaying(); });
+  if (npOpen) npOpen.addEventListener('click', function() { panel.classList.add('open'); });
 
   // Tabs
   document.querySelectorAll('.chill-tab').forEach(function(tab) {
@@ -251,26 +276,20 @@ function initChillZone() {
     });
   });
 
-  // ---- Global stop: kills ALL audio (nature + YouTube) ----
+  // ---- Global stop ----
   var currentNatureBtn = null;
   var currentNatureAudio = null;
 
   function stopAll() {
-    // Stop nature sound
-    if (currentNatureAudio) {
-      currentNatureAudio.pause();
-      currentNatureAudio.currentTime = 0;
-    }
+    if (currentNatureAudio) { currentNatureAudio.pause(); currentNatureAudio.currentTime = 0; }
     if (currentNatureBtn) currentNatureBtn.classList.remove('playing');
-    currentNatureBtn = null;
-    currentNatureAudio = null;
-
-    // Stop YouTube by clearing the src
+    currentNatureBtn = null; currentNatureAudio = null;
     var frame = document.getElementById('ytFrame');
-    var player = document.getElementById('ytPlayer');
+    var ytPlayer = document.getElementById('ytPlayer');
     if (frame) frame.src = '';
-    if (player) player.style.display = 'none';
+    if (ytPlayer) ytPlayer.style.display = 'none';
     document.querySelectorAll('.stream-card').forEach(function(c) { c.classList.remove('active'); });
+    hideNowPlaying();
   }
 
   // Nature sounds
@@ -279,23 +298,17 @@ function initChillZone() {
       var snd = btn.dataset.snd;
       var audio = document.getElementById('snd-' + snd);
       if (!audio) return;
-
-      // Tapping same button = stop
-      if (currentNatureBtn === btn) {
-        stopAll();
-        return;
-      }
-
-      // Stop everything first (including YouTube)
+      if (currentNatureBtn === btn) { stopAll(); return; }
       stopAll();
-
-      // Play new sound
       audio.volume = 0.7;
       audio.currentTime = 0;
       audio.play().catch(function(e) { console.log('Audio err:', e); });
       btn.classList.add('playing');
       currentNatureBtn = btn;
       currentNatureAudio = audio;
+      // Show now playing bar with sound name
+      var label = btn.querySelector('span') ? btn.querySelector('span').textContent : snd;
+      showNowPlaying('🌿 ' + label + ' — tap Stop to end');
     });
   });
 
@@ -304,17 +317,15 @@ function initChillZone() {
     card.addEventListener('click', function() {
       var ytId = card.dataset.yt;
       if (!ytId) return;
-
-      // Stop everything first (including nature sounds)
       stopAll();
-
       card.classList.add('active');
-      var player = document.getElementById('ytPlayer');
+      var ytPlayer = document.getElementById('ytPlayer');
       var frame  = document.getElementById('ytFrame');
-      if (player && frame) {
+      if (ytPlayer && frame) {
         frame.src = 'https://www.youtube.com/embed/' + ytId + '?autoplay=0&rel=0&modestbranding=1';
-        player.style.display = 'block';
+        ytPlayer.style.display = 'block';
       }
+      showNowPlaying('🎧 ' + card.textContent.trim() + ' — tap Stop to end');
     });
   });
 }

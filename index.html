@@ -71,8 +71,8 @@
 
   <!-- ===== TICKER ===== -->
   <div class="ticker-wrap" aria-label="Good news headlines ticker">
-    <div class="ticker-label">🎉 Today:</div>
-    <div class="ticker-track" id="tickerTrack">
+    <span class="ticker-label">🎉 Today</span>
+    <div class="ticker-outer"><div class="ticker-track" id="tickerTrack">
       <span>Sea turtle population up 40% in 5 years 🐢</span>
       <span>•</span>
       <span>Town builds free library for everyone — it's booming 📚</span>
@@ -87,7 +87,7 @@
       <span>•</span>
       <span>Neighborhood transforms abandoned lot into bee garden 🐝</span>
       <span>•</span>
-    </div>
+    </div></div>
   </div>
 
   <!-- ===== TODAY'S STORIES ===== -->
@@ -324,6 +324,14 @@
       </div>
     </div>
   </footer>
+
+  <!-- Now Playing Bar (appears when audio is active) -->
+  <div id="nowPlayingBar" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9990;background:#1a1a1a;color:#fff;padding:10px 16px;display:none;align-items:center;gap:12px;font-size:.88rem;">
+    <span style="flex-shrink:0;">🎵</span>
+    <span id="nowPlayingLabel" style="flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">Nothing playing</span>
+    <button id="nowPlayingStop" style="background:#f5c842;color:#1a1a1a;border:none;border-radius:6px;padding:4px 12px;font-weight:700;cursor:pointer;flex-shrink:0;">■ Stop</button>
+    <button id="nowPlayingOpen" style="background:transparent;color:#f5c842;border:1px solid #f5c842;border-radius:6px;padding:4px 10px;font-size:.8rem;cursor:pointer;flex-shrink:0;">Open</button>
+  </div>
 
   <!-- ===== ZEN LOFI WIDGET ===== -->
   <!-- Preload audio elements - most reliable iOS approach -->

@@ -4,6 +4,7 @@
 
 /* ---------- Reset & Base ---------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { overflow-x: hidden; max-width: 100%; }
 
 :root {
   --yellow:    #f5c842;
@@ -144,16 +145,21 @@ body {
 /* ---------- Ticker ---------- */
 .ticker-wrap {
   background: var(--yellow);
-  display: flex; align-items: center; gap: 12px;
-  padding: 10px 20px; overflow: hidden;
+  display: flex; align-items: center;
+  padding: 10px 0 10px 20px;
   border-bottom: 2px solid var(--yellow-dk);
   position: relative;
   z-index: 10;
-  clear: both;
+  overflow: hidden;
 }
 .ticker-label {
   flex-shrink: 0; font-size: .85rem; font-weight: 700;
-  white-space: nowrap;
+  white-space: nowrap; padding-right: 12px;
+  background: var(--yellow);
+  position: relative; z-index: 2;
+}
+.ticker-outer {
+  flex: 1; overflow: hidden; min-width: 0;
 }
 .ticker-track {
   display: flex; gap: 24px; white-space: nowrap;
