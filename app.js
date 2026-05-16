@@ -231,12 +231,11 @@ function initScrollReveal() {
 
 /* ---------- Zen Lofi Widget ---------- */
 function initChillZone() {
-  var trigger = document.getElementById('chillTrigger');
-  var panel   = document.getElementById('chillPanel');
+  var trigger  = document.getElementById('chillTrigger');
+  var panel    = document.getElementById('chillPanel');
   var closeBtn = document.getElementById('chillClose');
   if (!trigger || !panel) return;
 
-  // Open / close
   trigger.addEventListener('click', function() { panel.classList.toggle('open'); });
   closeBtn.addEventListener('click', function() { panel.classList.remove('open'); });
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape') panel.classList.remove('open'); });
@@ -252,25 +251,44 @@ function initChillZone() {
     });
   });
 
-  // Nature sounds — plain HTML5 <audio> elements, most reliable on iOS
+  // Nature sounds — single play, tap to toggle, tapping new one stops old
+  var currentBtn = null;
+  var currentAudio = null;
+
   document.querySelectorAll('.nb').forEach(function(btn) {
     btn.addEventListener('click', function() {
       var snd = btn.dataset.snd;
       var audio = document.getElementById('snd-' + snd);
       if (!audio) return;
-      if (!audio.paused) {
+
+      // If tapping currently playing button — stop it
+      if (currentBtn === btn) {
         audio.pause();
         audio.currentTime = 0;
         btn.classList.remove('playing');
-      } else {
-        audio.volume = 0.6;
-        audio.play().catch(function() {});
-        btn.classList.add('playing');
+        currentBtn = null;
+        currentAudio = null;
+        return;
       }
+
+      // Stop whatever was playing before
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+      }
+      if (currentBtn) currentBtn.classList.remove('playing');
+
+      // Play new sound
+      audio.volume = 0.7;
+      audio.currentTime = 0;
+      audio.play().catch(function(e) { console.log('Audio error:', e); });
+      btn.classList.add('playing');
+      currentBtn = btn;
+      currentAudio = audio;
     });
   });
 
-  // Stream cards — load YouTube in iframe
+  // Stream cards — load YouTube in iframe (no autoplay — user taps play)
   document.querySelectorAll('.stream-card').forEach(function(card) {
     card.addEventListener('click', function() {
       var ytId = card.dataset.yt;
@@ -280,7 +298,8 @@ function initChillZone() {
       var player = document.getElementById('ytPlayer');
       var frame  = document.getElementById('ytFrame');
       if (player && frame) {
-        frame.src = 'https://www.youtube.com/embed/' + ytId + '?autoplay=1';
+        // No autoplay — user taps play in the iframe
+        frame.src = 'https://www.youtube.com/embed/' + ytId + '?autoplay=0&rel=0&modestbranding=1';
         player.style.display = 'block';
       }
     });
