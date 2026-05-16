@@ -28,7 +28,7 @@ function renderStories(stories) {
         '<h3><a href="' + s.link + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;" onclick="event.stopPropagation()">' + s.title + '</a></h3>' +
         (s.description ? '<p>' + s.description.slice(0,160) + (s.description.length>160?'…':'') + '</p>' : '') +
         '<div class="card-footer">' +
-          '<span class="card-source" style="font-size:.78rem;color:#999;">' + s.source + '</span>' +
+          '' +
           '<span class="card-date">' + s.dateStr + '</span>' +
           '<button class="smile-btn" data-id="' + s.id + '" aria-label="Smile for this story">😊 <span class="smile-count">' + smiles + '</span></button>' +
         '</div>' +
@@ -37,6 +37,7 @@ function renderStories(stories) {
   });
 
   grid.innerHTML = html;
+  populateTicker(stories);
   // Re-init after dynamic render
   initSmileButtons();
   if (typeof initScrollReveal === 'function') initScrollReveal();
@@ -89,18 +90,36 @@ function initStats() {
 }
 
 /* ---------- Ticker — JS-driven seamless loop ---------- */
+function populateTicker(stories) {
+  const track = document.getElementById('tickerTrack');
+  if (!track || !stories || !stories.length) return;
+
+  // Build ticker from real story headlines
+  const items = stories.slice(0, 15).map(s => {
+    const url = s.internalUrl || ('#');
+    const headline = (s.aiHeadline || s.title || '').slice(0, 80);
+    return `<a href="${url}" style="color:inherit;text-decoration:none;white-space:nowrap;" onclick="event.stopPropagation()">${headline}</a><span style="margin:0 20px;opacity:.4;">•</span>`;
+  }).join('');
+
+  track.innerHTML = items + items; // duplicate for seamless loop
+  // Reset animation position
+  if (window._tickerPos !== undefined) window._tickerPos = 0;
+  window._tickerHalf = null;
+}
+
 function initTicker() {
   const track = document.getElementById('tickerTrack');
   if (!track) return;
 
-  // Duplicate content for seamless loop
+  // Duplicate static content as fallback until stories load
   track.innerHTML += track.innerHTML;
 
   const speed = 80; // pixels per second — feels snappy but readable
-  let pos = 0;
+  window._tickerPos = 0;
   let half = null;
   let raf = null;
   let paused = false;
+  Object.defineProperty(window, "_tickerHalf", { get: () => half, set: v => { half = v; }, configurable: true });
 
   function getHalf() {
     // Half = width of one copy (before duplication)
@@ -110,9 +129,10 @@ function initTicker() {
   function tick() {
     if (!paused) {
       if (!half) half = getHalf();
-      pos += speed / 60;
-      if (pos >= half) pos = 0; // seamless reset — no jump
-      track.style.transform = 'translateX(-' + pos + 'px)';
+      window._tickerPos += speed / 60;
+      if (!half) half = track.scrollWidth / 2;
+      if (window._tickerPos >= half) window._tickerPos = 0;
+      track.style.transform = 'translateX(-' + window._tickerPos + 'px)';
     }
     raf = requestAnimationFrame(tick);
   }

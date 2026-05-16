@@ -117,33 +117,33 @@ body {
 /* ---------- Hero ---------- */
 .hero {
   background: linear-gradient(160deg, #fff8d6 0%, #fde9b0 50%, #ffe4c8 100%);
-  padding: 80px 0 0;
+  padding: 28px 0 0;
   position: relative; overflow: hidden;
 }
-.hero-inner { text-align: center; padding-bottom: 60px; }
+.hero-inner { text-align: center; padding-bottom: 24px; }
 .hero-kicker {
-  display: inline-block; font-size: .9rem; font-weight: 600;
-  color: var(--text-2); letter-spacing: .04em; margin-bottom: 16px;
+  display: inline-block; font-size: .82rem; font-weight: 600;
+  color: var(--text-2); letter-spacing: .04em; margin-bottom: 10px;
 }
 .hero h1 {
-  font-family: var(--font-serif); font-size: clamp(2.6rem, 7vw, 5rem);
-  font-weight: 900; line-height: 1.1; color: var(--text);
-  margin-bottom: 16px;
+  font-family: var(--font-serif); font-size: clamp(1.6rem, 6vw, 4rem);
+  font-weight: 900; line-height: 1.15; color: var(--text);
+  margin-bottom: 10px;
 }
 .hero-tagline {
-  font-size: clamp(1rem, 2.5vw, 1.3rem); color: var(--text-2);
-  max-width: 540px; margin: 0 auto 32px;
+  font-size: clamp(.88rem, 2.2vw, 1.1rem); color: var(--text-2);
+  max-width: 540px; margin: 0 auto 20px;
 }
 .hero-actions {
-  display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
-  margin-bottom: 48px;
+  display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+  margin-bottom: 24px;
 }
 .hero-stats {
-  display: flex; gap: 40px; justify-content: center; flex-wrap: wrap;
+  display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
 }
 .stat { display: flex; flex-direction: column; align-items: center; }
 .stat-num {
-  font-family: var(--font-serif); font-size: 2rem; font-weight: 700;
+  font-family: var(--font-serif); font-size: clamp(1.3rem, 4vw, 2rem); font-weight: 700;
   color: var(--text);
 }
 .stat-label { font-size: .8rem; color: var(--text-3); font-weight: 500; }
