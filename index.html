@@ -325,81 +325,60 @@
     </div>
   </footer>
 
-  <!-- ===== CHILL ZONE WIDGET ===== -->
-  <!-- Floating trigger -->
-  <button class="chill-trigger" id="chillTrigger" aria-label="Open Zen Lofi music player" aria-expanded="false" aria-controls="chillPanel">
-    🎵
-  </button>
+  <!-- ===== ZEN LOFI WIDGET ===== -->
+  <button class="chill-trigger" id="chillTrigger">🎵</button>
 
-  <!-- Panel -->
-  <div class="chill-panel" id="chillPanel" role="region" aria-label="Zen Lofi music player">
+  <div class="chill-panel" id="chillPanel">
     <div class="chill-header">
-      <span class="chill-title">🎵 <a href="https://zenlofi.com" target="_blank" style="color:inherit;text-decoration:none;">Zen Lofi</a></span>
-      <button class="chill-close" id="chillClose" aria-label="Close Zen Lofi">✕</button>
+      <span class="chill-title">🎵 <a href="https://zenlofi.com" target="_blank">Zen Lofi</a></span>
+      <button class="chill-close" id="chillClose">✕</button>
     </div>
-
-    <!-- Tab pills -->
-    <div class="chill-tabs" role="tablist" aria-label="Zen Lofi tabs">
-      <button class="chill-tab active" role="tab" aria-selected="true"  aria-controls="chillLofi"    data-tab="chillLofi">🎧 Lo-fi</button>
-      <button class="chill-tab"        role="tab" aria-selected="false" aria-controls="chillNature"  data-tab="chillNature">🌿 Nature</button>
-      <button class="chill-tab"        role="tab" aria-selected="false" aria-controls="chillSpotify" data-tab="chillSpotify">🎶 Lo-fi Mix</button>
+    <div class="chill-tabs">
+      <button class="chill-tab active" data-tab="tabNature">🌿 Nature</button>
+      <button class="chill-tab" data-tab="tabLofi">🎧 Lo-fi</button>
+      <button class="chill-tab" data-tab="tabLinks">🔗 Streams</button>
     </div>
-
-    <!-- Tab bodies -->
     <div class="chill-body">
 
-      <!-- Tab 1: Lo-fi Beats -->
-      <div class="chill-pane active" id="chillLofi" role="tabpanel">
-        <iframe
-          id="lofiFrame"
-          width="100%" height="80"
-          data-src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=0"
-          src="about:blank"
-          frameborder="0"
-          allow="autoplay; encrypted-media"
-          allowfullscreen
-          title="Lo-fi Girl 🎵 live stream"
-          loading="lazy"
-        ></iframe>
-      </div>
-
-      <!-- Tab 2: Nature Sounds -->
-      <div class="chill-pane" id="chillNature" role="tabpanel">
-        <div class="nature-btns">
-          <button class="nature-btn" aria-label="Play rain sounds">
-            🌧️ Rain
-            <span class="nb-indicator" aria-hidden="true">▶</span>
-          </button>
-          <button class="nature-btn" aria-label="Play ocean sounds">
-            🌊 Ocean
-            <span class="nb-indicator" aria-hidden="true">▶</span>
-          </button>
-          <button class="nature-btn" aria-label="Play forest sounds">
-            🌿 Forest
-            <span class="nb-indicator" aria-hidden="true">▶</span>
-          </button>
+      <!-- Nature Sounds — Web Audio API, no external files -->
+      <div class="chill-pane active" id="tabNature">
+        <p class="chill-hint">Tap a sound to play · tap again to stop · mix multiple</p>
+        <div class="nature-grid">
+          <button class="nb" data-sound="rain">🌧️<span>Rain</span></button>
+          <button class="nb" data-sound="ocean">🌊<span>Ocean</span></button>
+          <button class="nb" data-sound="forest">🌿<span>Forest</span></button>
+          <button class="nb" data-sound="fire">🔥<span>Fire</span></button>
+          <button class="nb" data-sound="cafe">☕<span>Café</span></button>
+          <button class="nb" data-sound="thunder">⛈️<span>Thunder</span></button>
+          <button class="nb" data-sound="wind">💨<span>Wind</span></button>
+          <button class="nb" data-sound="fan">🌀<span>Fan</span></button>
         </div>
-        <p class="nature-hint">Click again to pause · loops forever</p>
       </div>
 
-      <!-- Tab 3: Lo-fi Playlist (SoundCloud — no login, full tracks) -->
-      <div class="chill-pane" id="chillSpotify" role="tabpanel">
-        <iframe
-          id="spotifyFrame"
-          src="about:blank"
-          data-src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user-818497599/sets/lofi-hip-hop-music&color=%23a78bfa&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"
-          width="100%" height="120"
-          frameborder="0"
-          allow="autoplay"
-          title="Lo-fi chill playlist"
-          loading="lazy"
-        ></iframe>
-        <p style="font-size:.72rem;color:#999;margin:4px 6px 0;">Full tracks — no login needed ✔</p>
+      <!-- Lo-fi: direct YouTube link (iframes blocked on iOS) -->
+      <div class="chill-pane" id="tabLofi">
+        <p class="chill-hint">Opens YouTube in a new tab — keeps playing while you browse</p>
+        <div class="stream-links">
+          <a href="https://www.youtube.com/watch?v=jfKfPfyJRdk" target="_blank" class="stream-link">🎵 Lo-fi Girl 24/7 Live</a>
+          <a href="https://www.youtube.com/watch?v=5qap5aO4i9A" target="_blank" class="stream-link">📚 Chill Study Beats</a>
+          <a href="https://www.youtube.com/watch?v=DWcJFNfaw9c" target="_blank" class="stream-link">🎹 Lo-fi Hip Hop Radio</a>
+          <a href="https://www.youtube.com/watch?v=lTRiuFIWV54" target="_blank" class="stream-link">🌙 Late Night Lo-fi</a>
+        </div>
       </div>
 
-    </div><!-- /chill-body -->
-  </div><!-- /chill-panel -->
+      <!-- External streams -->
+      <div class="chill-pane" id="tabLinks">
+        <p class="chill-hint">Opens in new tab — full tracks, free</p>
+        <div class="stream-links">
+          <a href="https://www.youtube.com/playlist?list=PLofht4PTcKYnaH8w5olJCI-wUNpMiCQBp" target="_blank" class="stream-link">🎶 Chill Vibes Playlist</a>
+          <a href="https://soundcloud.com/search?q=lofi+chill&filter.duration=epic" target="_blank" class="stream-link">☁️ SoundCloud Lo-fi</a>
+          <a href="https://zenlofi.com" target="_blank" class="stream-link zl-link">🌟 Full Experience → ZenLofi.com</a>
+        </div>
+      </div>
 
-  <script src="app.js"></script>
+    </div>
+  </div>
+  <!-- ===== END ZEN LOFI WIDGET ===== -->
+
 </body>
 </html>

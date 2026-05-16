@@ -383,31 +383,81 @@ cite { font-size: .95rem; color: var(--text-2); font-style: normal; }
 
 /* ---------- Chill Zone Widget ---------- */
 
-/* Floating trigger button */
+/* ===== ZEN LOFI WIDGET ===== */
 .chill-trigger {
-  position: fixed;
-  bottom: 28px;
-  right: 28px;
-  z-index: 9999;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: var(--yellow);
-  border: none;
-  font-size: 1.8rem;
-  cursor: pointer;
-  box-shadow: 0 4px 18px rgba(0,0,0,.18);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform var(--trans), box-shadow var(--trans), background var(--trans);
+  position: fixed; bottom: 24px; right: 20px; z-index: 9999;
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--yellow); border: none; font-size: 1.9rem;
+  cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,.25);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .2s, box-shadow .2s;
 }
-.chill-trigger:hover {
-  transform: scale(1.1);
-  background: var(--yellow-dk);
-  box-shadow: 0 6px 24px rgba(0,0,0,.24);
+.chill-trigger:active { transform: scale(.92); }
+.chill-panel {
+  position: fixed; bottom: 100px; right: 12px; left: 12px; z-index: 9998;
+  background: #fff; border-radius: 20px;
+  box-shadow: 0 12px 48px rgba(0,0,0,.22);
+  overflow: hidden; max-width: 420px; margin: 0 auto;
+  transform: translateY(20px) scale(.97); opacity: 0; pointer-events: none;
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1), opacity .2s;
 }
-.chill-trigger:active { transform: scale(.95); }
+@media (min-width: 480px) {
+  .chill-panel { left: auto; right: 20px; width: 380px; }
+}
+.chill-panel.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
+.chill-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 18px; background: var(--yellow);
+}
+.chill-title { font-weight: 700; font-size: 1.05rem; }
+.chill-title a { color: inherit; text-decoration: none; }
+.chill-close {
+  width: 36px; height: 36px; border-radius: 50%; border: none;
+  background: rgba(0,0,0,.1); font-size: 1.1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.chill-tabs { display: flex; gap: 8px; padding: 12px 12px 0; }
+.chill-tab {
+  flex: 1; padding: 12px 4px; border-radius: 12px;
+  border: 2px solid #e5e7eb; background: none;
+  font-size: .85rem; font-weight: 600; cursor: pointer;
+  color: #555; min-height: 48px; transition: all .15s;
+}
+.chill-tab.active { background: var(--yellow); border-color: var(--yellow); color: #1a1a1a; }
+.chill-body { padding: 12px; }
+.chill-pane { display: none; }
+.chill-pane.active { display: block; }
+.chill-hint { font-size: .78rem; color: #888; margin: 0 0 10px; text-align: center; }
+
+/* Nature grid — 2x4 big tap targets */
+.nature-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.nb {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 16px 8px; border-radius: 14px;
+  border: 2px solid #e5e7eb; background: #fafafa;
+  font-size: 1.6rem; cursor: pointer; min-height: 72px;
+  transition: all .15s; -webkit-tap-highlight-color: transparent;
+}
+.nb span { font-size: .78rem; font-weight: 600; color: #444; }
+.nb.playing { background: #d1fae5; border-color: #34d399; }
+.nb:active { transform: scale(.93); }
+
+/* Stream links — big tap-friendly */
+.stream-links { display: flex; flex-direction: column; gap: 10px; }
+.stream-link {
+  display: block; padding: 16px 18px; border-radius: 14px;
+  background: #f3f4f6; border: 2px solid #e5e7eb;
+  font-size: .95rem; font-weight: 600; color: #1a1a1a;
+  text-decoration: none; transition: all .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.stream-link:active { background: var(--yellow-lt); border-color: var(--yellow); }
+.zl-link { background: var(--yellow-lt); border-color: var(--yellow); }
+/* ===== END ZEN LOFI WIDGET ===== */
+
 
 /* Tooltip */
 .chill-trigger::after {

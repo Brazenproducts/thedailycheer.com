@@ -235,244 +235,127 @@ function initScrollReveal() {
 
 /* ---------- Zen Lofi Widget ---------- */
 function initChillZone() {
-  const trigger   = document.getElementById('chillTrigger');
-  const panel     = document.getElementById('chillPanel');
-  const closeBtn  = document.getElementById('chillClose');
-  const tabs      = document.querySelectorAll('.chill-tab');
-  const panes     = document.querySelectorAll('.chill-pane');
+  const trigger = document.getElementById('chillTrigger');
+  const panel   = document.getElementById('chillPanel');
+  const closeBtn = document.getElementById('chillClose');
   if (!trigger || !panel) return;
 
-  // Lazy-load flags — don't inject iframes until the tab is first opened
-  let lofiLoaded    = false;
-  let spotifyLoaded = false;
+  // Open / close
+  trigger.addEventListener('click', () => panel.classList.toggle('open'));
+  closeBtn.addEventListener('click', () => panel.classList.remove('open'));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') panel.classList.remove('open'); });
 
-  // Active audio tracking
-  let activeAudio = null;     // HTMLAudioElement currently playing
-  let activeNatureBtn = null; // .nature-btn element currently active
-
-  /* --- helpers --- */
-  function stopNatureAudio() {
-    if (activeAudio) {
-      activeAudio.pause();
-      activeAudio.currentTime = 0;
-    }
-    if (activeNatureBtn) {
-      activeNatureBtn.classList.remove('playing');
-      activeNatureBtn.querySelector('.nb-indicator').textContent = '▶';
-    }
-    activeAudio = null;
-    activeNatureBtn = null;
-  }
-
-  function clearYouTube() {
-    const iframe = document.getElementById('lofiFrame');
-    if (iframe && lofiLoaded) {
-      // Reset src to stop playback without destroying the element
-      const src = iframe.dataset.src;
-      iframe.src = src; // reloads frame, stopping audio
-    }
-  }
-
-  function clearSpotify() {
-    const iframe = document.getElementById('spotifyFrame');
-    if (iframe && spotifyLoaded) {
-      const src = iframe.dataset.src;
-      iframe.src = src;
-    }
-  }
-
-  function activateTab(targetTab) {
-    tabs.forEach(t => t.classList.toggle('active', t === targetTab));
-    const id = targetTab.dataset.tab;
-    panes.forEach(p => p.classList.toggle('active', p.id === id));
-
-    // Stop other media when switching away from nature tab
-    if (id !== 'chillNature') stopNatureAudio();
-    if (id !== 'chillLofi')   clearYouTube();
-    if (id !== 'chillSpotify') clearSpotify();
-
-    // Lazy-load iframes
-    if (id === 'chillLofi' && !lofiLoaded) {
-      const iframe = document.getElementById('lofiFrame');
-      if (iframe) { iframe.src = iframe.dataset.src; lofiLoaded = true; }
-    }
-    if (id === 'chillSpotify' && !spotifyLoaded) {
-      const iframe = document.getElementById('spotifyFrame');
-      if (iframe) { iframe.src = iframe.dataset.src; spotifyLoaded = true; }
-    }
-  }
-
-  /* --- open / close --- */
-  function openPanel() {
-    panel.classList.add('open');
-    trigger.setAttribute('aria-expanded', 'true');
-    trigger.textContent = '🎵';
-  }
-
-  function closePanel() {
-    panel.classList.remove('open');
-    trigger.setAttribute('aria-expanded', 'false');
-    // Stop all audio
-    stopNatureAudio();
-    clearYouTube();
-    clearSpotify();
-  }
-
-  trigger.addEventListener('click', () => {
-    panel.classList.contains('open') ? closePanel() : openPanel();
-  });
-  closeBtn.addEventListener('click', closePanel);
-
-  // Close on Escape
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && panel.classList.contains('open')) closePanel();
+  // Tabs
+  document.querySelectorAll('.chill-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.chill-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.chill-pane').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const pane = document.getElementById(tab.dataset.tab);
+      if (pane) pane.classList.add('active');
+    });
   });
 
-  /* --- tab switching --- */
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => activateTab(tab));
-  });
-
-  /* --- Web Audio API sound generator --- */
+  // Nature sounds via Web Audio API
   let audioCtx = null;
-  let activeNodes = []; // {source, gainNode} for stopNatureAudio
+  const playing = {}; // soundType -> {source, gainNode, ...}
 
-  function getAudioCtx() {
+  function getCtx() {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     if (audioCtx.state === 'suspended') audioCtx.resume();
     return audioCtx;
   }
 
-  function makeNoise(type) {
-    // type: 'white', 'pink', 'brown'
-    const ctx = getAudioCtx();
-    const bufferSize = 2 * ctx.sampleRate;
-    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-    const data = buffer.getChannelData(0);
-    let b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0,lastOut=0;
-    for (let i = 0; i < bufferSize; i++) {
-      const white = Math.random() * 2 - 1;
-      if (type === 'white') { data[i] = white; }
+  function makeBuffer(ctx, type) {
+    const sr = ctx.sampleRate;
+    const buf = ctx.createBuffer(1, sr * 3, sr);
+    const d = buf.getChannelData(0);
+    let b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0,lo=0;
+    for (let i = 0; i < d.length; i++) {
+      const w = Math.random() * 2 - 1;
+      if (type === 'white') { d[i] = w * 0.5; }
       else if (type === 'pink') {
-        b0=0.99886*b0+white*0.0555179; b1=0.99332*b1+white*0.0750759;
-        b2=0.96900*b2+white*0.1538520; b3=0.86650*b3+white*0.3104856;
-        b4=0.55000*b4+white*0.5329522; b5=-0.7616*b5-white*0.0168980;
-        data[i] = (b0+b1+b2+b3+b4+b5+b6+white*0.5362) * 0.11;
-        b6 = white * 0.115926;
-      } else { // brown
-        lastOut = (lastOut + (0.02 * white)) / 1.02;
-        data[i] = lastOut * 3.5;
+        b0=.99886*b0+w*.0555179; b1=.99332*b1+w*.0750759;
+        b2=.96900*b2+w*.1538520; b3=.86650*b3+w*.3104856;
+        b4=.55000*b4+w*.5329522; b5=-.7616*b5-w*.0168980;
+        d[i]=(b0+b1+b2+b3+b4+b5+b6+w*.5362)*.11; b6=w*.115926;
+      } else {
+        lo=(lo+(0.02*w))/1.02; d[i]=lo*3.5;
       }
     }
-    const source = ctx.createBufferSource();
-    source.buffer = buffer;
-    source.loop = true;
-    return source;
+    return buf;
   }
 
-  function makeSoundForType(soundType) {
-    const ctx = getAudioCtx();
+  function startSound(type) {
+    const ctx = getCtx();
     const gainNode = ctx.createGain();
-    gainNode.gain.value = 0.5;
+    gainNode.gain.value = 0.55;
     gainNode.connect(ctx.destination);
 
-    let source;
-    if (soundType === 'rain') {
-      // Rain: white noise + low-pass filter
-      source = makeNoise('white');
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'lowpass'; filter.frequency.value = 1200;
-      source.connect(filter); filter.connect(gainNode);
-    } else if (soundType === 'ocean') {
-      // Ocean: brown noise + tremolo (slow volume oscillation)
-      source = makeNoise('brown');
-      const tremolo = ctx.createGain();
-      const lfo = ctx.createOscillator();
-      lfo.frequency.value = 0.15;
-      const lfoGain = ctx.createGain(); lfoGain.gain.value = 0.3;
-      lfo.connect(lfoGain); lfoGain.connect(tremolo.gain);
-      tremolo.gain.value = 0.7; lfo.start();
-      source.connect(tremolo); tremolo.connect(gainNode);
-    } else if (soundType === 'forest') {
-      // Forest: pink noise (gentle, airy)
-      source = makeNoise('pink');
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'bandpass'; filter.frequency.value = 800; filter.Q.value = 0.5;
-      source.connect(filter); filter.connect(gainNode);
-    } else if (soundType === 'fire') {
-      // Fire: brown noise + slight crackle high-freq mix
-      source = makeNoise('brown');
-      const crackle = makeNoise('white');
-      const crackleGain = ctx.createGain(); crackleGain.gain.value = 0.05;
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'lowpass'; filter.frequency.value = 600;
-      source.connect(filter); filter.connect(gainNode);
-      crackle.connect(crackleGain); crackleGain.connect(gainNode);
-      crackle.start();
-      activeNodes.push({source: crackle, gainNode: crackleGain});
-    } else if (soundType === 'cafe') {
-      // Café: pink noise bandpass
-      source = makeNoise('pink');
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'bandpass'; filter.frequency.value = 1500; filter.Q.value = 1;
-      source.connect(filter); filter.connect(gainNode);
-    } else if (soundType === 'thunder') {
-      // Thunder: brown noise, slow tremolo
-      source = makeNoise('brown');
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'lowpass'; filter.frequency.value = 300;
-      source.connect(filter); filter.connect(gainNode);
-    } else if (soundType === 'wind') {
-      // Wind: pink noise, slow panning
-      source = makeNoise('pink');
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'bandpass'; filter.frequency.value = 400; filter.Q.value = 0.3;
-      source.connect(filter); filter.connect(gainNode);
+    const noiseType = (type==='ocean'||type==='fire'||type==='thunder') ? 'brown' :
+                      (type==='rain'||type==='cafe') ? 'white' : 'pink';
+    const buf = makeBuffer(ctx, noiseType);
+
+    const source = ctx.createBufferSource();
+    source.buffer = buf;
+    source.loop = true;
+
+    if (type==='rain') {
+      const f=ctx.createBiquadFilter(); f.type='lowpass'; f.frequency.value=1400;
+      source.connect(f); f.connect(gainNode);
+    } else if (type==='ocean') {
+      const lfo=ctx.createOscillator(); const lg=ctx.createGain();
+      lfo.frequency.value=0.12; lg.gain.value=0.25;
+      gainNode.gain.value=0.6;
+      lfo.connect(lg); lg.connect(gainNode.gain); lfo.start();
+      source.connect(gainNode);
+      playing[type] = {source, gainNode, extra: lfo};
+    } else if (type==='forest') {
+      const f=ctx.createBiquadFilter(); f.type='bandpass'; f.frequency.value=900; f.Q.value=0.4;
+      source.connect(f); f.connect(gainNode);
+    } else if (type==='fire') {
+      const f=ctx.createBiquadFilter(); f.type='lowpass'; f.frequency.value=500;
+      source.connect(f); f.connect(gainNode); gainNode.gain.value=0.7;
+    } else if (type==='cafe') {
+      const f=ctx.createBiquadFilter(); f.type='bandpass'; f.frequency.value=1800; f.Q.value=1.2;
+      source.connect(f); f.connect(gainNode);
+    } else if (type==='thunder') {
+      const f=ctx.createBiquadFilter(); f.type='lowpass'; f.frequency.value=280;
+      source.connect(f); f.connect(gainNode); gainNode.gain.value=0.8;
+    } else if (type==='wind') {
+      const f=ctx.createBiquadFilter(); f.type='bandpass'; f.frequency.value=350; f.Q.value=0.3;
+      source.connect(f); f.connect(gainNode);
     } else { // fan
-      // Fan: white noise lowpass
-      source = makeNoise('white');
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'lowpass'; filter.frequency.value = 800;
-      source.connect(filter); filter.connect(gainNode);
+      const f=ctx.createBiquadFilter(); f.type='lowpass'; f.frequency.value=700;
+      source.connect(f); f.connect(gainNode); gainNode.gain.value=0.4;
     }
+
     source.start();
-    return {source, gainNode};
+    if (!playing[type]) playing[type] = {source, gainNode};
   }
 
-  const soundTypes = ['rain','ocean','forest','fire','cafe','thunder','wind','fan'];
-
-  function stopNatureAudioNodes() {
-    activeNodes.forEach(n => { try { n.source.stop(); } catch(e){} });
-    activeNodes = [];
-    if (activeNatureBtn) {
-      activeNatureBtn.classList.remove('playing');
-      activeNatureBtn.querySelector('.nb-indicator').textContent = '▶';
-      activeNatureBtn = null;
-    }
+  function stopSound(type) {
+    if (!playing[type]) return;
+    try { playing[type].source.stop(); } catch(e){}
+    try { if (playing[type].extra) playing[type].extra.stop(); } catch(e){}
+    try { playing[type].gainNode.disconnect(); } catch(e){}
+    delete playing[type];
   }
 
-  /* Override the stopNatureAudio helper to also stop Web Audio nodes */
-  const _origStop = stopNatureAudio;
-  function stopNatureAudio() { stopNatureAudioNodes(); }
-
-  /* --- nature sounds --- */
-  document.querySelectorAll('.nature-btn').forEach((btn, i) => {
-    const soundType = soundTypes[i] || 'rain';
+  document.querySelectorAll('.nb').forEach(btn => {
     btn.addEventListener('click', () => {
-      if (activeNatureBtn === btn) {
-        // Toggle — stop
-        stopNatureAudioNodes();
+      const type = btn.dataset.sound;
+      if (btn.classList.contains('playing')) {
+        stopSound(type);
+        btn.classList.remove('playing');
       } else {
-        stopNatureAudioNodes();
-        const nodes = makeSoundForType(soundType);
-        activeNodes.push(nodes);
+        startSound(type);
         btn.classList.add('playing');
-        btn.querySelector('.nb-indicator').textContent = '⏸';
-        activeNatureBtn = btn;
       }
     });
   });
 }
+
 
 /* ---------- Init ---------- */
 document.addEventListener('DOMContentLoaded', () => {
