@@ -1,3 +1,61 @@
+
+/* ---------- Dynamic Story Loader ---------- */
+function renderStories(stories) {
+  var grid = document.getElementById('storyGrid');
+  if (!grid) return;
+
+  var html = '';
+  var featured = true;
+
+  stories.forEach(function(s, i) {
+    var isFeatured = featured && i === 0;
+    var isFunny = s.category === 'funny';
+    var classes = 'story-card' + (isFeatured ? ' card-featured' : '') + (isFunny ? ' card-funny' : '');
+    var badge = isFeatured ? '<div class="card-badge">⭐ Featured Story</div>' :
+                isFunny   ? '<div class="card-badge funny-badge">😂 Funny</div>' : '';
+    var catLabel = (s.category || 'good-news').replace(/-/g,' ').replace(/\w/g, function(c){return c.toUpperCase();});
+    var smiles = s.smileCount || Math.floor(Math.random()*800 + 50);
+
+    html += '<article class="' + classes + '" data-category="' + (s.category||'good-news') + '">' +
+      badge +
+      '<div class="card-media">' +
+        '<img src="' + s.imageUrl + '" alt="' + (s.imageAlt||'') + '" loading="lazy" ' +
+          'style="width:100%;height:100%;object-fit:cover;" ' +
+          'onerror="this.style.background=\'linear-gradient(135deg,#a8edea,#fed6e3)\';this.style.display=\'block\';">' +
+      '</div>' +
+      '<div class="card-body">' +
+        '<span class="card-tag">' + catLabel + '</span>' +
+        '<h3><a href="' + s.link + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">' + s.title + '</a></h3>' +
+        (s.description ? '<p>' + s.description.slice(0,160) + (s.description.length>160?'…':'') + '</p>' : '') +
+        '<div class="card-footer">' +
+          '<span class="card-source" style="font-size:.78rem;color:#999;">' + s.source + '</span>' +
+          '<span class="card-date">' + s.dateStr + '</span>' +
+          '<button class="smile-btn" data-id="' + s.id + '" aria-label="Smile for this story">😊 <span class="smile-count">' + smiles + '</span></button>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  });
+
+  grid.innerHTML = html;
+  // Re-init smile buttons for dynamically added cards
+  initSmileButtons();
+  initScrollReveal();
+}
+
+function loadStories() {
+  fetch('stories.json?v=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(stories) {
+      if (!stories || !stories.length) throw new Error('empty');
+      renderStories(stories);
+    })
+    .catch(function(e) {
+      console.log('Stories load failed, using static fallback:', e);
+      var loading = document.getElementById('storiesLoading');
+      if (loading) loading.textContent = 'Could not load stories. Try refreshing.';
+    });
+}
+
 /* ============================================================
    The Daily Cheer — app.js
    ============================================================ */
