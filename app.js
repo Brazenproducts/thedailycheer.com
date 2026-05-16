@@ -233,7 +233,7 @@ function initScrollReveal() {
   });
 }
 
-/* ---------- Chill Zone Widget ---------- */
+/* ---------- Zen Lofi Widget ---------- */
 function initChillZone() {
   const trigger   = document.getElementById('chillTrigger');
   const panel     = document.getElementById('chillPanel');
