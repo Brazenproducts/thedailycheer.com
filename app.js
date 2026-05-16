@@ -251,54 +251,67 @@ function initChillZone() {
     });
   });
 
-  // Nature sounds — single play, tap to toggle, tapping new one stops old
-  var currentBtn = null;
-  var currentAudio = null;
+  // ---- Global stop: kills ALL audio (nature + YouTube) ----
+  var currentNatureBtn = null;
+  var currentNatureAudio = null;
 
+  function stopAll() {
+    // Stop nature sound
+    if (currentNatureAudio) {
+      currentNatureAudio.pause();
+      currentNatureAudio.currentTime = 0;
+    }
+    if (currentNatureBtn) currentNatureBtn.classList.remove('playing');
+    currentNatureBtn = null;
+    currentNatureAudio = null;
+
+    // Stop YouTube by clearing the src
+    var frame = document.getElementById('ytFrame');
+    var player = document.getElementById('ytPlayer');
+    if (frame) frame.src = '';
+    if (player) player.style.display = 'none';
+    document.querySelectorAll('.stream-card').forEach(function(c) { c.classList.remove('active'); });
+  }
+
+  // Nature sounds
   document.querySelectorAll('.nb').forEach(function(btn) {
     btn.addEventListener('click', function() {
       var snd = btn.dataset.snd;
       var audio = document.getElementById('snd-' + snd);
       if (!audio) return;
 
-      // If tapping currently playing button — stop it
-      if (currentBtn === btn) {
-        audio.pause();
-        audio.currentTime = 0;
-        btn.classList.remove('playing');
-        currentBtn = null;
-        currentAudio = null;
+      // Tapping same button = stop
+      if (currentNatureBtn === btn) {
+        stopAll();
         return;
       }
 
-      // Stop whatever was playing before
-      if (currentAudio) {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-      }
-      if (currentBtn) currentBtn.classList.remove('playing');
+      // Stop everything first (including YouTube)
+      stopAll();
 
       // Play new sound
       audio.volume = 0.7;
       audio.currentTime = 0;
-      audio.play().catch(function(e) { console.log('Audio error:', e); });
+      audio.play().catch(function(e) { console.log('Audio err:', e); });
       btn.classList.add('playing');
-      currentBtn = btn;
-      currentAudio = audio;
+      currentNatureBtn = btn;
+      currentNatureAudio = audio;
     });
   });
 
-  // Stream cards — load YouTube in iframe (no autoplay — user taps play)
+  // Stream cards
   document.querySelectorAll('.stream-card').forEach(function(card) {
     card.addEventListener('click', function() {
       var ytId = card.dataset.yt;
       if (!ytId) return;
-      document.querySelectorAll('.stream-card').forEach(function(c) { c.classList.remove('active'); });
+
+      // Stop everything first (including nature sounds)
+      stopAll();
+
       card.classList.add('active');
       var player = document.getElementById('ytPlayer');
       var frame  = document.getElementById('ytFrame');
       if (player && frame) {
-        // No autoplay — user taps play in the iframe
         frame.src = 'https://www.youtube.com/embed/' + ytId + '?autoplay=0&rel=0&modestbranding=1';
         player.style.display = 'block';
       }
