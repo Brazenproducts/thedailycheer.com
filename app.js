@@ -194,7 +194,7 @@ const cheerFacts = [
   { emoji: "⭐", fact: "There are more stars in the observable universe than grains of sand on all of Earth's beaches. You matter in an impossibly vast place." },
 ];
 
-let cheerIndex = 0;
+let cheerIndex = Math.floor(Math.random() * cheerFacts.length);
 
 function initMoodLifter() {
   const overlay = document.getElementById('moodOverlay');
