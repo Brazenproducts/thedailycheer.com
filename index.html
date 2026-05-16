@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Daily Cheer – Good news. Funny news. Stories that actually make you smile.</title>
+  <meta name="description" content="The Daily Cheer is your daily dose of good news, funny stories, and heartwarming moments. No doom. No drama. Just stuff that actually makes you smile." />
+  <meta name="theme-color" content="#f5c842" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="The Daily Cheer" />
+  <meta property="og:description" content="Good news. Funny news. Stories that actually make you smile." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.thedailycheer.com" />
+  <meta property="og:image" content="https://www.thedailycheer.com/og-image.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Daily Cheer" />
+  <meta name="twitter:description" content="Good news. Funny news. Stories that actually make you smile." />
+  <meta name="twitter:image" content="https://www.thedailycheer.com/og-image.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="logo" aria-label="The Daily Cheer home">
+        <span class="logo-icon">☀️</span>
+        <span class="logo-text">The Daily Cheer</span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#today">Today</a>
+        <a href="#categories">Categories</a>
+        <a href="#newsletter">Newsletter</a>
+      </nav>
+      <button class="mood-btn" id="moodBtn" aria-label="Cheer me up">😄 Cheer Me Up</button>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="container hero-inner">
+      <p class="hero-kicker">☀️ Your daily antidote to the news cycle</p>
+      <h1 id="hero-heading">The Daily Cheer</h1>
+      <p class="hero-tagline">Good news. Funny news. Stories that actually make you smile.</p>
+      <div class="hero-actions">
+        <a href="#today" class="btn btn-primary">Read Today's Good News</a>
+        <a href="#newsletter" class="btn btn-secondary">Get It In Your Inbox</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num" id="storiesCount">0</span><span class="stat-label">Happy Stories</span></div>
+        <div class="stat"><span class="stat-num" id="smilesCount">0</span><span class="stat-label">Smiles Delivered</span></div>
+        <div class="stat"><span class="stat-num" id="daysCount">0</span><span class="stat-label">Days of Good News</span></div>
+      </div>
+    </div>
+    <div class="hero-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#fffdf4"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===== TICKER ===== -->
+  <div class="ticker-wrap" aria-label="Good news headlines ticker">
+    <div class="ticker-label">🎉 Today:</div>
+    <div class="ticker-track" id="tickerTrack">
+      <span>Sea turtle population up 40% in 5 years 🐢</span>
+      <span>•</span>
+      <span>Town builds free library for everyone — it's booming 📚</span>
+      <span>•</span>
+      <span>Scientists grow chocolate that's actually good for you 🍫</span>
+      <span>•</span>
+      <span>Golden retriever elected honorary mayor for 3rd term 🐾</span>
+      <span>•</span>
+      <span>Teen invents recyclable shoe that plants wildflowers 🌸</span>
+      <span>•</span>
+      <span>Retiree learns to code at 82, ships first app 💻</span>
+      <span>•</span>
+      <span>Neighborhood transforms abandoned lot into bee garden 🐝</span>
+      <span>•</span>
+    </div>
+  </div>
+
+  <!-- ===== TODAY'S STORIES ===== -->
+  <main id="today">
+    <div class="container section-header">
+      <h2>Today's Good Stuff</h2>
+      <p class="section-sub">Curated daily. Verified real. 100% doom-free.</p>
+    </div>
+
+    <div class="container story-grid" id="storyGrid">
+
+      <!-- FEATURED -->
+      <article class="story-card card-featured" data-category="environment">
+        <div class="card-badge">⭐ Featured Story</div>
+        <div class="card-media">
+          <div class="card-img-placeholder" style="background: linear-gradient(135deg,#a8edea,#fed6e3);">
+            <span class="card-emoji">🌊</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Environment</span>
+          <h3>Great Barrier Reef Records Highest Coral Coverage in 36 Years</h3>
+          <p>Scientists monitoring Australia's iconic reef report coral coverage at levels not seen since systematic surveys began — a testament to global conservation efforts and reduced agricultural runoff.</p>
+          <div class="card-footer">
+            <span class="card-date">May 16, 2026</span>
+            <button class="smile-btn" data-id="story-1" aria-label="Smile for this story">😊 <span class="smile-count">284</span></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 2 -->
+      <article class="story-card" data-category="community">
+        <div class="card-media">
+          <div class="card-img-placeholder" style="background: linear-gradient(135deg,#ffecd2,#fcb69f);">
+            <span class="card-emoji">🏘️</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Community</span>
+          <h3>Detroit Neighborhood Transforms 40 Vacant Lots Into Urban Farms</h3>
+          <p>Residents grew 80,000 lbs of fresh produce last year — and gave most of it away.</p>
+          <div class="card-footer">
+            <span class="card-date">May 16, 2026</span>
+            <button class="smile-btn" data-id="story-2" aria-label="Smile for this story">😊 <span class="smile-count">193</span></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 3 -->
+      <article class="story-card" data-category="science">
+        <div class="card-media">
+          <div class="card-img-placeholder" style="background: linear-gradient(135deg,#d4fc79,#96e6a1);">
+            <span class="card-emoji">🧬</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Science</span>
+          <h3>New Treatment Eliminates Peanut Allergy in 80% of Trial Patients</h3>
+          <p>A phase-3 trial using oral immunotherapy has shown breakthrough results — millions of families may soon say goodbye to epipen anxiety at birthday parties.</p>
+          <div class="card-footer">
+            <span class="card-date">May 15, 2026</span>
+            <button class="smile-btn" data-id="story-3" aria-label="Smile for this story">😊 <span class="smile-count">441</span></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 4 -->
+      <article class="story-card" data-category="animals">
+        <div class="card-media">
+          <div class="card-img-placeholder" style="background: linear-gradient(135deg,#fbc2eb,#a6c1ee);">
+            <span class="card-emoji">🐼</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Animals</span>
+          <h3>Giant Panda Population Officially Off the Endangered List</h3>
+          <p>China's decades-long breeding and habitat protection program has pushed wild panda numbers past the 2,000 mark for the first time in recorded history.</p>
+          <div class="card-footer">
+            <span class="card-date">May 15, 2026</span>
+            <button class="smile-btn" data-id="story-4" aria-label="Smile for this story">😊 <span class="smile-count">612</span></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 5 - FUNNY -->
+      <article class="story-card card-funny" data-category="funny">
+        <div class="card-badge funny-badge">😂 Funny</div>
+        <div class="card-media">
+          <div class="card-img-placeholder" style="background: linear-gradient(135deg,#f6d365,#fda085);">
+            <span class="card-emoji">🦆</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Funny</span>
+          <h3>Duck Leads Police on 45-Minute Low-Speed Chase Through Mall Food Court</h3>
+          <p>Authorities eventually resolved the standoff with a handful of bread — no citations were issued. The duck declined to comment.</p>
+          <div class="card-footer">
+            <span class="card-date">May 16, 2026</span>
+            <button class="smile-btn" data-id="story-5" aria-label="Smile for this story">😊 <span class="smile-count">1,047</span></button>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 6 -->
+      <article class="story-card" data-category="humans">
+        <div class="card-media">
+          <div class="card-img-placeholder" style="background: linear-gradient(135deg,#e0c3fc,#8ec5fc);">
+            <span class="card-emoji">👴</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">People</span>
+          <h3>93-Year-Old Veteran Finishes Marathon He Started in 1969 — and Never Quit</h3>
+          <p>"Life kept interrupting," Harold said. "But the finish line doesn't move." He crossed it in 6:42:11, flanked by his four grandchildren.</p>
+          <div class="card-footer">
+            <span class="card-date">May 14, 2026</span>
+            <button class="smile-btn" data-id="story-6" aria-label="Smile for this story">😊 <span class="smile-count">889</span></button>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /story-grid -->
+
+    <!-- LOAD MORE -->
+    <div class="container load-more-wrap">
+      <button class="btn btn-outline" id="loadMoreBtn">Load More Good News ↓</button>
+    </div>
+  </main>
+
+  <!-- ===== CATEGORIES ===== -->
+  <section class="categories-section" id="categories" aria-labelledby="cat-heading">
+    <div class="container">
+      <h2 id="cat-heading">Browse by Mood</h2>
+      <p class="section-sub">Find exactly the kind of good you need right now.</p>
+      <div class="category-grid">
+        <button class="cat-pill active" data-filter="all">✨ All Good News</button>
+        <button class="cat-pill" data-filter="environment">🌿 Environment</button>
+        <button class="cat-pill" data-filter="science">🔬 Science</button>
+        <button class="cat-pill" data-filter="animals">🐾 Animals</button>
+        <button class="cat-pill" data-filter="community">🏘️ Community</button>
+        <button class="cat-pill" data-filter="humans">❤️ People</button>
+        <button class="cat-pill" data-filter="funny">😂 Funny</button>
+        <button class="cat-pill" data-filter="kids">👦 Kids</button>
+        <button class="cat-pill" data-filter="sports">🏆 Sports</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUOTE OF THE DAY ===== -->
+  <section class="quote-section" aria-label="Quote of the day">
+    <div class="container quote-inner">
+      <div class="quote-mark" aria-hidden="true">"</div>
+      <blockquote id="quoteText">
+        In the middle of every difficulty lies opportunity.
+      </blockquote>
+      <cite id="quoteAuthor">— Albert Einstein</cite>
+      <button class="btn btn-outline btn-sm" id="newQuoteBtn">New Quote 🎲</button>
+    </div>
+  </section>
+
+  <!-- ===== MOOD LIFTER ===== -->
+  <div class="mood-overlay" id="moodOverlay" role="dialog" aria-modal="true" aria-label="Cheer me up" hidden>
+    <div class="mood-box">
+      <button class="mood-close" id="moodClose" aria-label="Close">✕</button>
+      <p class="mood-emoji" id="moodEmoji">🌈</p>
+      <p class="mood-fact" id="moodFact">Loading something amazing...</p>
+      <button class="btn btn-primary btn-sm" id="nextFactBtn">Another One 🎲</button>
+    </div>
+  </div>
+
+  <!-- ===== NEWSLETTER ===== -->
+  <section class="newsletter-section" id="newsletter" aria-labelledby="nl-heading">
+    <div class="container newsletter-inner">
+      <div class="nl-text">
+        <span class="nl-kicker">📬 Zero spam. Pure joy.</span>
+        <h2 id="nl-heading">Get The Daily Cheer in Your Inbox</h2>
+        <p>3–5 good-news stories every weekday morning. Takes 5 minutes to read. Makes your whole day better.</p>
+        <ul class="nl-perks">
+          <li>✅ Curated every morning</li>
+          <li>✅ Unsubscribe any time</li>
+          <li>✅ Free forever</li>
+        </ul>
+      </div>
+      <form class="nl-form" id="nlForm" novalidate aria-label="Newsletter signup form">
+        <label for="nlName" class="sr-only">Your first name</label>
+        <input type="text" id="nlName" name="name" placeholder="First name" autocomplete="given-name" required />
+        <label for="nlEmail" class="sr-only">Your email address</label>
+        <input type="email" id="nlEmail" name="email" placeholder="Your email address" autocomplete="email" required />
+        <button type="submit" class="btn btn-primary">Subscribe — It's Free 🎉</button>
+        <p class="nl-fine">No spam. No sad news. Unsubscribe with one click.</p>
+        <div class="nl-success" id="nlSuccess" hidden role="status">
+          🎉 You're in! Check your inbox for a welcome story.
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="logo" aria-label="The Daily Cheer home">
+          <span class="logo-icon">☀️</span>
+          <span class="logo-text">The Daily Cheer</span>
+        </a>
+        <p>Good news. Funny news. Stories that actually make you smile.</p>
+        <p class="footer-fine">Updated every weekday. No doom guaranteed.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <h3>Explore</h3>
+        <a href="#today">Today's Stories</a>
+        <a href="#categories">Categories</a>
+        <a href="#newsletter">Newsletter</a>
+      </nav>
+      <nav class="footer-nav" aria-label="Company navigation">
+        <h3>Company</h3>
+        <a href="/about.html">About</a>
+        <a href="/submit.html">Submit a Story</a>
+        <a href="/privacy.html">Privacy Policy</a>
+      </nav>
+      <div class="footer-social">
+        <h3>Follow the Cheer</h3>
+        <div class="social-links">
+          <a href="#" aria-label="Twitter / X">𝕏</a>
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="TikTok">🎵</a>
+          <a href="#" aria-label="Facebook">f</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© <span id="footerYear">2026</span> The Daily Cheer · Made with ☀️ · <a href="/privacy.html">Privacy</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
