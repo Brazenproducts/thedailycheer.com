@@ -88,11 +88,41 @@ function initStats() {
   setTimeout(runCounters, 400);
 }
 
-/* ---------- Ticker Duplication (seamless loop) ---------- */
+/* ---------- Ticker — JS-driven seamless loop ---------- */
 function initTicker() {
   const track = document.getElementById('tickerTrack');
   if (!track) return;
-  track.innerHTML += track.innerHTML; // duplicate for seamless loop
+
+  // Duplicate content for seamless loop
+  track.innerHTML += track.innerHTML;
+
+  const speed = 80; // pixels per second — feels snappy but readable
+  let pos = 0;
+  let half = null;
+  let raf = null;
+  let paused = false;
+
+  function getHalf() {
+    // Half = width of one copy (before duplication)
+    return track.scrollWidth / 2;
+  }
+
+  function tick() {
+    if (!paused) {
+      if (!half) half = getHalf();
+      pos += speed / 60;
+      if (pos >= half) pos = 0; // seamless reset — no jump
+      track.style.transform = 'translateX(-' + pos + 'px)';
+    }
+    raf = requestAnimationFrame(tick);
+  }
+
+  track.addEventListener('mouseenter', () => { paused = true; });
+  track.addEventListener('mouseleave', () => { paused = false; });
+  track.addEventListener('touchstart', () => { paused = true; }, { passive: true });
+  track.addEventListener('touchend', () => { setTimeout(() => { paused = false; }, 2000); }, { passive: true });
+
+  raf = requestAnimationFrame(tick);
 }
 
 /* ---------- Smile Buttons ---------- */

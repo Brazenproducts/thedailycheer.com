@@ -165,11 +165,9 @@ body {
 }
 .ticker-track {
   display: flex; gap: 24px; white-space: nowrap;
-  animation: ticker 16s linear infinite;
   font-size: .88rem; min-width: 0;
+  will-change: transform;
 }
-.ticker-track:hover { animation-play-state: paused; }
-@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* ---------- Story Grid ---------- */
 main { padding: 40px 0 20px; margin-top: 20px; }
