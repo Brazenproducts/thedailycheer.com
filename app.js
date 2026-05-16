@@ -322,7 +322,7 @@ function initChillZone() {
       var ytPlayer = document.getElementById('ytPlayer');
       var frame  = document.getElementById('ytFrame');
       if (ytPlayer && frame) {
-        frame.src = 'https://www.youtube.com/embed/' + ytId + '?autoplay=0&rel=0&modestbranding=1';
+        frame.src = 'https://www.youtube.com/embed/' + ytId + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
         ytPlayer.style.display = 'block';
       }
       showNowPlaying('🎧 ' + card.textContent.trim() + ' — tap Stop to end');
