@@ -165,7 +165,7 @@ body {
 }
 .ticker-track {
   display: flex; gap: 24px; white-space: nowrap;
-  animation: ticker 28s linear infinite;
+  animation: ticker 16s linear infinite;
   font-size: .88rem; min-width: 0;
 }
 .ticker-track:hover { animation-play-state: paused; }

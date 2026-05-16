@@ -37,9 +37,10 @@ function renderStories(stories) {
   });
 
   grid.innerHTML = html;
-  // Re-init smile buttons for dynamically added cards
+  // Re-init after dynamic render
   initSmileButtons();
-  initScrollReveal();
+  if (typeof initScrollReveal === 'function') initScrollReveal();
+  if (typeof initCategoryFilter === 'function') initCategoryFilter();
 }
 
 function loadStories() {
@@ -391,6 +392,7 @@ function initChillZone() {
 
 /* ---------- Init ---------- */
 document.addEventListener('DOMContentLoaded', () => {
+  loadStories();
   initStats();
   initTicker();
   initSmileButtons();
