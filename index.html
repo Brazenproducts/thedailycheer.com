@@ -342,7 +342,7 @@
     <div class="chill-tabs" role="tablist" aria-label="Zen Lofi tabs">
       <button class="chill-tab active" role="tab" aria-selected="true"  aria-controls="chillLofi"    data-tab="chillLofi">🎧 Lo-fi</button>
       <button class="chill-tab"        role="tab" aria-selected="false" aria-controls="chillNature"  data-tab="chillNature">🌿 Nature</button>
-      <button class="chill-tab"        role="tab" aria-selected="false" aria-controls="chillSpotify" data-tab="chillSpotify">🎶 Playlist</button>
+      <button class="chill-tab"        role="tab" aria-selected="false" aria-controls="chillSpotify" data-tab="chillSpotify">🎶 Lo-fi Mix</button>
     </div>
 
     <!-- Tab bodies -->
@@ -382,18 +382,19 @@
         <p class="nature-hint">Click again to pause · loops forever</p>
       </div>
 
-      <!-- Tab 3: Feel Good Playlist -->
+      <!-- Tab 3: Lo-fi Playlist (SoundCloud — no login, full tracks) -->
       <div class="chill-pane" id="chillSpotify" role="tabpanel">
         <iframe
           id="spotifyFrame"
           src="about:blank"
-          data-src="https://open.spotify.com/embed/playlist/37i9dQZF1DXdPec7aLTmlC"
-          width="100%" height="80"
+          data-src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user-818497599/sets/lofi-hip-hop-music&color=%23a78bfa&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"
+          width="100%" height="120"
           frameborder="0"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          title="Spotify Happy Hits playlist"
+          allow="autoplay"
+          title="Lo-fi chill playlist"
           loading="lazy"
         ></iframe>
+        <p style="font-size:.72rem;color:#999;margin:4px 6px 0;">Full tracks — no login needed ✔</p>
       </div>
 
     </div><!-- /chill-body -->

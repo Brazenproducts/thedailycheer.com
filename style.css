@@ -389,12 +389,12 @@ cite { font-size: .95rem; color: var(--text-2); font-style: normal; }
   bottom: 28px;
   right: 28px;
   z-index: 9999;
-  width: 52px;
-  height: 52px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   background: var(--yellow);
   border: none;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   cursor: pointer;
   box-shadow: 0 4px 18px rgba(0,0,0,.18);
   display: flex;
@@ -411,7 +411,7 @@ cite { font-size: .95rem; color: var(--text-2); font-style: normal; }
 
 /* Tooltip */
 .chill-trigger::after {
-  content: "Need some chill vibes?";
+  content: "🎵 Open Zen Lofi";
   position: absolute;
   bottom: calc(100% + 10px);
   right: 0;
@@ -448,7 +448,7 @@ cite { font-size: .95rem; color: var(--text-2); font-style: normal; }
   bottom: 92px;
   right: 28px;
   z-index: 9998;
-  width: 300px;
+  width: min(340px, calc(100vw - 24px));
   background: var(--surface);
   border-radius: 18px;
   box-shadow: 0 12px 48px rgba(0,0,0,.18);
@@ -496,21 +496,22 @@ cite { font-size: .95rem; color: var(--text-2); font-style: normal; }
 .chill-tabs {
   display: flex;
   gap: 6px;
-  padding: 10px 12px 0;
+  padding: 12px 12px 0;
 }
 .chill-tab {
   flex: 1;
-  padding: 6px 4px;
+  padding: 10px 4px;
   border-radius: 100px;
   border: 1.5px solid var(--border);
   background: none;
-  font-size: .72rem;
+  font-size: .82rem;
   font-weight: 600;
   font-family: var(--font-sans);
   cursor: pointer;
   color: var(--text-2);
   transition: background var(--trans), border-color var(--trans), color var(--trans);
   white-space: nowrap;
+  min-height: 44px;
 }
 .chill-tab:hover { background: var(--yellow-lt); border-color: var(--yellow); }
 .chill-tab.active {
@@ -536,11 +537,11 @@ cite { font-size: .95rem; color: var(--text-2); font-style: normal; }
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 14px;
+  padding: 14px 16px;
   border-radius: 10px;
   border: 1.5px solid var(--border);
   background: var(--surface);
-  font-size: .88rem;
+  font-size: .95rem;
   font-weight: 600;
   font-family: var(--font-sans);
   color: var(--text);
@@ -548,6 +549,7 @@ cite { font-size: .95rem; color: var(--text-2); font-style: normal; }
   transition: background var(--trans), border-color var(--trans), transform var(--trans);
   width: 100%;
   text-align: left;
+  min-height: 48px;
 }
 .nature-btn:hover {
   background: var(--yellow-lt);
