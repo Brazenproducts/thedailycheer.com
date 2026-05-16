@@ -264,18 +264,21 @@
         </div>
       </div>
 
-      <!-- Lo-fi: links to Zen Lofi -->
+      <!-- Lo-fi: self-hosted CC-BY tracks (Kevin MacLeod) -->
       <div class="chill-pane" id="tabLofi">
-        <div style="text-align:center;padding:20px 10px;">
-          <div style="font-size:3rem;margin-bottom:12px;">🎵</div>
-          <p style="font-size:.95rem;color:#555;margin-bottom:20px;line-height:1.5;">Lo-fi beats, ambient sounds &amp; a focus timer — all in one place.</p>
-          <a href="https://zenlofi.com" target="_blank" rel="noopener"
-            style="display:inline-block;background:#f5c842;color:#1a1a1a;font-weight:700;padding:12px 28px;border-radius:100px;text-decoration:none;font-size:.95rem;">
-            Open Zen Lofi 🎧
-          </a>
-          <p style="font-size:.78rem;color:#999;margin-top:14px;">Free forever · No ads · No account needed</p>
+        <p class="chill-hint">Tap a track to play · tap again to stop</p>
+        <div class="nature-grid">
+          <button class="nb" data-snd="lofi1">🎹<span>Chill Piano</span></button>
+          <button class="nb" data-snd="lofi2">🎸<span>Mystery Vibes</span></button>
+          <button class="nb" data-snd="lofi3">✨<span>Dewdrop</span></button>
         </div>
+        <p style="text-align:center;margin-top:16px;">
+          <a href="https://zenlofi.com" target="_blank" rel="noopener" style="font-size:.78rem;color:#999;">More at Zen Lofi →</a>
+        </p>
       </div>
+      <audio id="snd-lofi1" src="sounds/lofi1.mp3" loop preload="none"></audio>
+      <audio id="snd-lofi2" src="sounds/lofi2.mp3" loop preload="none"></audio>
+      <audio id="snd-lofi3" src="sounds/lofi3.mp3" loop preload="none"></audio>
 
       <!-- Zen Lofi CTA -->
       <div class="chill-pane" id="tabLinks">
