@@ -326,6 +326,16 @@
   </footer>
 
   <!-- ===== ZEN LOFI WIDGET ===== -->
+  <!-- Preload audio elements - most reliable iOS approach -->
+  <audio id="snd-rain"    src="/sounds/rain.wav"    loop preload="none"></audio>
+  <audio id="snd-ocean"   src="/sounds/ocean.wav"   loop preload="none"></audio>
+  <audio id="snd-forest"  src="/sounds/forest.wav"  loop preload="none"></audio>
+  <audio id="snd-fire"    src="/sounds/fire.wav"    loop preload="none"></audio>
+  <audio id="snd-cafe"    src="/sounds/cafe.wav"    loop preload="none"></audio>
+  <audio id="snd-thunder" src="/sounds/thunder.wav" loop preload="none"></audio>
+  <audio id="snd-wind"    src="/sounds/wind.wav"    loop preload="none"></audio>
+  <audio id="snd-fan"     src="/sounds/fan.wav"     loop preload="none"></audio>
+
   <button class="chill-trigger" id="chillTrigger">🎵</button>
 
   <div class="chill-panel" id="chillPanel">
@@ -336,53 +346,53 @@
     <div class="chill-tabs">
       <button class="chill-tab active" data-tab="tabNature">🌿 Nature</button>
       <button class="chill-tab" data-tab="tabLofi">🎧 Lo-fi</button>
-      <button class="chill-tab" data-tab="tabLinks">🔗 Streams</button>
+      <button class="chill-tab" data-tab="tabLinks">🌟 Zen Lofi</button>
     </div>
     <div class="chill-body">
 
-      <!-- Nature Sounds — Web Audio API, no external files -->
+      <!-- Nature Sounds — real audio files, simple HTML5 audio -->
       <div class="chill-pane active" id="tabNature">
-        <p class="chill-hint">Tap a sound to play · tap again to stop · mix multiple</p>
+        <p class="chill-hint">Tap to play · tap again to stop · mix multiple</p>
         <div class="nature-grid">
-          <button class="nb" data-sound="rain">🌧️<span>Rain</span></button>
-          <button class="nb" data-sound="ocean">🌊<span>Ocean</span></button>
-          <button class="nb" data-sound="forest">🌿<span>Forest</span></button>
-          <button class="nb" data-sound="fire">🔥<span>Fire</span></button>
-          <button class="nb" data-sound="cafe">☕<span>Café</span></button>
-          <button class="nb" data-sound="thunder">⛈️<span>Thunder</span></button>
-          <button class="nb" data-sound="wind">💨<span>Wind</span></button>
-          <button class="nb" data-sound="fan">🌀<span>Fan</span></button>
+          <button class="nb" data-snd="rain">🌧️<span>Rain</span></button>
+          <button class="nb" data-snd="ocean">🌊<span>Ocean</span></button>
+          <button class="nb" data-snd="forest">🌿<span>Forest</span></button>
+          <button class="nb" data-snd="fire">🔥<span>Fire</span></button>
+          <button class="nb" data-snd="cafe">☕<span>Café</span></button>
+          <button class="nb" data-snd="thunder">⛈️<span>Thunder</span></button>
+          <button class="nb" data-snd="wind">💨<span>Wind</span></button>
+          <button class="nb" data-snd="fan">🌀<span>Fan</span></button>
         </div>
       </div>
 
-      <!-- Lo-fi: direct YouTube link (iframes blocked on iOS) -->
+      <!-- Lo-fi: tap a card to load YouTube in panel -->
       <div class="chill-pane" id="tabLofi">
-        <p class="chill-hint">Tap a stream card to load it · then tap ▶ play</p>
+        <p class="chill-hint">Tap a stream · then tap ▶ to play</p>
         <div class="stream-cards">
           <div class="stream-card" data-yt="jfKfPfyJRdk">🎵 Lo-fi Girl 24/7</div>
           <div class="stream-card" data-yt="5qap5aO4i9A">📚 Chill Study Beats</div>
           <div class="stream-card" data-yt="DWcJFNfaw9c">🎹 Lo-fi Beats Radio</div>
         </div>
-        <div id="ytPlayer" style="margin-top:10px;display:none;">
+        <div id="ytPlayer" style="display:none;margin-top:10px;position:relative;z-index:1;">
           <iframe id="ytFrame" width="100%" height="120" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen style="border-radius:12px;"></iframe>
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media"
+            allowfullscreen style="border-radius:12px;display:block;"></iframe>
         </div>
       </div>
 
-      <!-- External streams -->
+      <!-- Zen Lofi CTA -->
       <div class="chill-pane" id="tabLinks">
-        <p class="chill-hint">SoundCloud — full tracks, no login</p>
-        <iframe width="100%" height="166" scrolling="no" frameborder="no"
-          src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/lo-fi-hip-hop-music/sets/lofi-hip-hop&color=%23a78bfa&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"
-          style="border-radius:12px;"></iframe>
-        <a href="https://zenlofi.com" target="_blank" class="stream-link zl-link" style="margin-top:10px;display:block;">🌟 Full Zen Lofi Experience →</a>
+        <div style="text-align:center;padding:16px 8px;">
+          <div style="font-size:2.5rem;margin-bottom:8px;">🎵</div>
+          <p style="font-weight:700;font-size:1rem;margin:0 0 6px;">Want the full experience?</p>
+          <p style="font-size:.85rem;color:#666;margin:0 0 16px;">Sound mixer, focus timer, more streams — all free</p>
+          <a href="https://zenlofi.com" target="_blank" style="display:inline-block;background:#f59e0b;color:#1a1a1a;font-weight:700;padding:12px 24px;border-radius:12px;text-decoration:none;font-size:1rem;">Open Zen Lofi →</a>
+        </div>
       </div>
 
     </div>
   </div>
   <!-- ===== END ZEN LOFI WIDGET ===== -->
-
   <script src="app.js"></script>
 </body>
 </html>

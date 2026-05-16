@@ -231,139 +231,57 @@ function initScrollReveal() {
 
 /* ---------- Zen Lofi Widget ---------- */
 function initChillZone() {
-  const trigger = document.getElementById('chillTrigger');
-  const panel   = document.getElementById('chillPanel');
-  const closeBtn = document.getElementById('chillClose');
+  var trigger = document.getElementById('chillTrigger');
+  var panel   = document.getElementById('chillPanel');
+  var closeBtn = document.getElementById('chillClose');
   if (!trigger || !panel) return;
 
   // Open / close
-  trigger.addEventListener('click', () => panel.classList.toggle('open'));
-  closeBtn.addEventListener('click', () => panel.classList.remove('open'));
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') panel.classList.remove('open'); });
+  trigger.addEventListener('click', function() { panel.classList.toggle('open'); });
+  closeBtn.addEventListener('click', function() { panel.classList.remove('open'); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') panel.classList.remove('open'); });
 
   // Tabs
-  document.querySelectorAll('.chill-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.chill-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.chill-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.chill-tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.chill-tab').forEach(function(t) { t.classList.remove('active'); });
+      document.querySelectorAll('.chill-pane').forEach(function(p) { p.classList.remove('active'); });
       tab.classList.add('active');
-      const pane = document.getElementById(tab.dataset.tab);
+      var pane = document.getElementById(tab.dataset.tab);
       if (pane) pane.classList.add('active');
     });
   });
 
-  // Nature sounds via Web Audio API
-  let audioCtx = null;
-  const playing = {}; // soundType -> {source, gainNode, ...}
-
-  async function getCtx() {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    if (audioCtx.state === 'suspended') await audioCtx.resume();
-    return audioCtx;
-  }
-
-  function makeBuffer(ctx, type) {
-    const sr = ctx.sampleRate;
-    const buf = ctx.createBuffer(1, sr * 3, sr);
-    const d = buf.getChannelData(0);
-    let b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0,lo=0;
-    for (let i = 0; i < d.length; i++) {
-      const w = Math.random() * 2 - 1;
-      if (type === 'white') { d[i] = w * 0.5; }
-      else if (type === 'pink') {
-        b0=.99886*b0+w*.0555179; b1=.99332*b1+w*.0750759;
-        b2=.96900*b2+w*.1538520; b3=.86650*b3+w*.3104856;
-        b4=.55000*b4+w*.5329522; b5=-.7616*b5-w*.0168980;
-        d[i]=(b0+b1+b2+b3+b4+b5+b6+w*.5362)*.11; b6=w*.115926;
+  // Nature sounds — plain HTML5 <audio> elements, most reliable on iOS
+  document.querySelectorAll('.nb').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var snd = btn.dataset.snd;
+      var audio = document.getElementById('snd-' + snd);
+      if (!audio) return;
+      if (!audio.paused) {
+        audio.pause();
+        audio.currentTime = 0;
+        btn.classList.remove('playing');
       } else {
-        lo=(lo+(0.02*w))/1.02; d[i]=lo*3.5;
+        audio.volume = 0.6;
+        audio.play().catch(function() {});
+        btn.classList.add('playing');
       }
-    }
-    return buf;
-  }
-
-  async function startSound(type) {
-    const ctx = await getCtx();
-    const gainNode = ctx.createGain();
-    gainNode.gain.value = 0.55;
-    gainNode.connect(ctx.destination);
-
-    const noiseType = (type==='ocean'||type==='fire'||type==='thunder') ? 'brown' :
-                      (type==='rain'||type==='cafe') ? 'white' : 'pink';
-    const buf = makeBuffer(ctx, noiseType);
-
-    const source = ctx.createBufferSource();
-    source.buffer = buf;
-    source.loop = true;
-
-    if (type==='rain') {
-      const f=ctx.createBiquadFilter(); f.type='lowpass'; f.frequency.value=1400;
-      source.connect(f); f.connect(gainNode);
-    } else if (type==='ocean') {
-      const lfo=ctx.createOscillator(); const lg=ctx.createGain();
-      lfo.frequency.value=0.12; lg.gain.value=0.25;
-      gainNode.gain.value=0.6;
-      lfo.connect(lg); lg.connect(gainNode.gain); lfo.start();
-      source.connect(gainNode);
-      playing[type] = {source, gainNode, extra: lfo};
-    } else if (type==='forest') {
-      const f=ctx.createBiquadFilter(); f.type='bandpass'; f.frequency.value=900; f.Q.value=0.4;
-      source.connect(f); f.connect(gainNode);
-    } else if (type==='fire') {
-      const f=ctx.createBiquadFilter(); f.type='lowpass'; f.frequency.value=500;
-      source.connect(f); f.connect(gainNode); gainNode.gain.value=0.7;
-    } else if (type==='cafe') {
-      const f=ctx.createBiquadFilter(); f.type='bandpass'; f.frequency.value=1800; f.Q.value=1.2;
-      source.connect(f); f.connect(gainNode);
-    } else if (type==='thunder') {
-      const f=ctx.createBiquadFilter(); f.type='lowpass'; f.frequency.value=280;
-      source.connect(f); f.connect(gainNode); gainNode.gain.value=0.8;
-    } else if (type==='wind') {
-      const f=ctx.createBiquadFilter(); f.type='bandpass'; f.frequency.value=350; f.Q.value=0.3;
-      source.connect(f); f.connect(gainNode);
-    } else { // fan
-      const f=ctx.createBiquadFilter(); f.type='lowpass'; f.frequency.value=700;
-      source.connect(f); f.connect(gainNode); gainNode.gain.value=0.4;
-    }
-
-    source.start();
-    if (!playing[type]) playing[type] = {source, gainNode};
-  }
-
-  function stopSound(type) {
-    if (!playing[type]) return;
-    try { playing[type].source.stop(); } catch(e){}
-    try { if (playing[type].extra) playing[type].extra.stop(); } catch(e){}
-    try { playing[type].gainNode.disconnect(); } catch(e){}
-    delete playing[type];
-  }
-
-  // Stream card click handler - load YouTube in iframe
-  document.querySelectorAll('.stream-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const ytId = card.dataset.yt;
-      if (!ytId) return;
-      const player = document.getElementById('ytPlayer');
-      const frame = document.getElementById('ytFrame');
-      if (!player || !frame) return;
-      // Mark active card
-      document.querySelectorAll('.stream-card').forEach(c => c.classList.remove('active'));
-      card.classList.add('active');
-      // Load the iframe
-      frame.src = `https://www.youtube.com/embed/${ytId}?autoplay=1`;
-      player.style.display = 'block';
     });
   });
 
-  document.querySelectorAll('.nb').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      const type = btn.dataset.sound;
-      if (btn.classList.contains('playing')) {
-        stopSound(type);
-        btn.classList.remove('playing');
-      } else {
-        await startSound(type);
-        btn.classList.add('playing');
+  // Stream cards — load YouTube in iframe
+  document.querySelectorAll('.stream-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      var ytId = card.dataset.yt;
+      if (!ytId) return;
+      document.querySelectorAll('.stream-card').forEach(function(c) { c.classList.remove('active'); });
+      card.classList.add('active');
+      var player = document.getElementById('ytPlayer');
+      var frame  = document.getElementById('ytFrame');
+      if (player && frame) {
+        frame.src = 'https://www.youtube.com/embed/' + ytId + '?autoplay=1';
+        player.style.display = 'block';
       }
     });
   });
