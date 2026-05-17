@@ -380,11 +380,23 @@ cite { font-size: .95rem; color: var(--text-2); font-style: normal; }
 /* ---------- Newsletter ---------- */
 .newsletter-section {
   background: var(--green);
-  padding: 80px 0;
+  padding: 48px 0;
   color: #fff;
 }
 .newsletter-inner {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+@media (max-width: 640px) {
+  .newsletter-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    text-align: center;
+  }
+  .nl-perks { align-items: center; }
+  .newsletter-section { padding: 36px 0; }
 }
 .nl-kicker { display: block; font-size: .85rem; font-weight: 700; opacity: .85; margin-bottom: 8px; }
 .newsletter-section h2 {
