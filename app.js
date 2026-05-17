@@ -199,9 +199,15 @@ function initCategoryFilter() {
   // Category pills
   document.querySelectorAll('.cat-pill').forEach(pill => {
     pill.addEventListener('click', () => {
-      document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-      activeCategory = pill.dataset.filter;
+      if (pill.classList.contains('active')) {
+        // Clicking active pill deselects → show all
+        pill.classList.remove('active');
+        activeCategory = 'all';
+      } else {
+        document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        activeCategory = pill.dataset.filter;
+      }
       applyFilters();
     });
   });
