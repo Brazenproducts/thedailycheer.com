@@ -17,7 +17,7 @@ function renderStories(stories) {
     var catLabel = (s.category || 'good-news').replace(/-/g,' ').replace(/\w/g, function(c){return c.toUpperCase();});
     var smiles = s.smileCount || Math.floor(Math.random()*800 + 50);
 
-    html += '<article class="' + classes + '" data-category="' + (s.category||'good-news') + '" data-region="' + region + '" style="cursor:pointer;" onclick="window.open(\'' + s.link + '\',\'_blank\',\'noopener\')">' +
+    html += '<article class="' + classes + '" data-category="' + (s.category||'good-news') + '" data-region="' + region + '" style="cursor:pointer;" onclick="window.location.href=\'' + (s.internalUrl || s.link || '#') + '\'">' +
       badge +
       '<div class="card-media">' +
         '<img src="' + s.imageUrl + '" alt="' + (s.imageAlt||'') + '" loading="lazy" ' +
