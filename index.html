@@ -208,10 +208,6 @@
     <span id="nowPlayingLabel" style="flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">Nothing playing</span>
     <button id="nowPlayingStop" style="background:#f5c842;color:#1a1a1a;border:none;border-radius:6px;padding:4px 12px;font-weight:700;cursor:pointer;flex-shrink:0;">■ Stop</button>
     <button id="nowPlayingOpen" style="background:transparent;color:#f5c842;border:1px solid #f5c842;border-radius:6px;padding:4px 10px;font-size:.8rem;cursor:pointer;flex-shrink:0;">Open</button>
-    <label style="display:flex;align-items:center;gap:6px;flex-shrink:0;cursor:pointer;font-size:.78rem;color:#aaa;" title="Keep playing when you switch tabs">
-      <input type="checkbox" id="tabToggle" style="width:14px;height:14px;cursor:pointer;accent-color:#f5c842;">
-      <span id="tabToggleLabel">Pauses on tab switch</span>
-    </label>
   </div>
 
   <!-- ===== ZEN LOFI WIDGET ===== -->
@@ -262,7 +258,13 @@
           <button class="nb" data-snd="lofi2">🎸<span>Mystery Vibes</span></button>
           <button class="nb" data-snd="lofi3">✨<span>Dewdrop</span></button>
         </div>
-        <p style="text-align:center;margin-top:16px;">
+        <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;padding:10px 12px;background:rgba(0,0,0,.04);border-radius:10px;">
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:.82rem;color:#555;user-select:none;">
+            <input type="checkbox" id="tabToggle" style="width:15px;height:15px;cursor:pointer;accent-color:#f59e0b;">
+            <span id="tabToggleLabel">Pauses when you switch tabs</span>
+          </label>
+        </div>
+        <p style="text-align:center;margin-top:12px;">
           <a href="https://zenlofi.com" target="_blank" rel="noopener" style="font-size:.78rem;color:#999;">More at Zen Lofi →</a>
         </p>
       </div>
@@ -283,6 +285,6 @@
     </div>
   </div>
   <!-- ===== END ZEN LOFI WIDGET ===== -->
-  <script src="app.js?v=11"></script>
+  <script src="app.js?v=12"></script>
 </body>
 </html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>All Stories — The Daily Cheer</title>
+  <meta name="description" content="Browse every feel-good story published on The Daily Cheer. Science, animals, community, funny — all the good news, searchable and browsable.">
+  <link rel="canonical" href="https://thedailycheer.com/stories/">
+  <link rel="stylesheet" href="../style.css?v=6">
+  <style>
+    .archive-header { padding: 40px 0 20px; text-align: center; }
+    .archive-header h1 { font-family: var(--font-serif); font-size: clamp(1.8rem,5vw,3rem); font-weight: 900; margin-bottom: 8px; }
+    .archive-header p { color: var(--text-2); font-size: 1rem; }
+    .archive-search { max-width: 480px; margin: 20px auto 0; display: flex; gap: 8px; }
+    .archive-search input { flex: 1; padding: 10px 16px; border: 1.5px solid var(--border); border-radius: 100px; font-size: .95rem; outline: none; }
+    .archive-search input:focus { border-color: var(--yellow); }
+    .archive-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 32px 0 60px; }
+    .arc-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); cursor: pointer; transition: transform .2s, box-shadow .2s; text-decoration: none; display: block; color: inherit; }
+    .arc-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+    .arc-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+    .arc-card-body { padding: 14px 16px; }
+    .arc-card-tag { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text-2); margin-bottom: 6px; display: block; }
+    .arc-card-title { font-size: .95rem; font-weight: 700; line-height: 1.35; margin-bottom: 6px; }
+    .arc-card-date { font-size: .75rem; color: var(--text-3); }
+    .archive-count { text-align: center; color: var(--text-2); font-size: .88rem; margin-bottom: 8px; }
+    .load-more-btn { display: block; margin: 0 auto 60px; padding: 12px 32px; background: var(--yellow); border: none; border-radius: 100px; font-weight: 700; font-size: .95rem; cursor: pointer; }
+    .load-more-btn:hover { background: #e6b800; }
+    .no-results { text-align: center; padding: 60px 20px; color: var(--text-2); font-size: 1rem; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="logo" aria-label="The Daily Cheer home">
+        <span class="logo-icon">☀️</span>
+        <span class="logo-text">The Daily Cheer</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="archive-header">
+        <h1>All Good News 📰</h1>
+        <p>Every story we've ever published — feel free to binge.</p>
+        <div class="archive-search">
+          <input type="text" id="searchInput" placeholder="Search stories..." autocomplete="off">
+        </div>
+      </div>
+
+      <div class="archive-count" id="archiveCount"></div>
+      <div class="archive-grid" id="archiveGrid"></div>
+      <button class="load-more-btn" id="loadMoreBtn" style="display:none">Load More Stories</button>
+    </div>
+  </main>
+
+  <footer style="text-align:center;padding:24px;font-size:.82rem;color:var(--text-2);border-top:1px solid var(--border);">
+    © 2026 <a href="/" style="color:var(--text-2);">The Daily Cheer</a> — Good news, always.
+  </footer>
+
+  <script>
+    const PER_PAGE = 30;
+    let allStories = [];
+    let filtered = [];
+    let shown = 0;
+
+    function slugify(title) {
+      return title.toLowerCase().replace(/[^a-z0-9\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').slice(0,60).replace(/-$/,'');
+    }
+
+    function renderCards(stories) {
+      return stories.map(s => {
+        const url = s.internalUrl || ('/stories/' + slugify(s.title||'') + '.html');
+        const tag = (s.category||'good-news').replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+        return `<a class="arc-card" href="${url}">
+          <img src="${s.imageUrl}" alt="${s.imageAlt||''}" loading="lazy" onerror="this.style.display='none'">
+          <div class="arc-card-body">
+            <span class="arc-card-tag">${tag}</span>
+            <div class="arc-card-title">${s.aiHeadline||s.title||''}</div>
+            <div class="arc-card-date">${s.dateStr||''}</div>
+          </div>
+        </a>`;
+      }).join('');
+    }
+
+    function showMore() {
+      const batch = filtered.slice(shown, shown + PER_PAGE);
+      document.getElementById('archiveGrid').insertAdjacentHTML('beforeend', renderCards(batch));
+      shown += batch.length;
+      document.getElementById('loadMoreBtn').style.display = shown < filtered.length ? 'block' : 'none';
+      document.getElementById('archiveCount').textContent = shown + ' of ' + filtered.length + ' stories';
+    }
+
+    function applySearch(q) {
+      q = q.toLowerCase().trim();
+      filtered = q ? allStories.filter(s =>
+        (s.title||'').toLowerCase().includes(q) ||
+        (s.aiHeadline||'').toLowerCase().includes(q) ||
+        (s.category||'').toLowerCase().includes(q)
+      ) : allStories;
+      shown = 0;
+      document.getElementById('archiveGrid').innerHTML = '';
+      if (!filtered.length) {
+        document.getElementById('archiveGrid').innerHTML = '<div class="no-results">No stories found for "' + q + '" 🔍</div>';
+        document.getElementById('loadMoreBtn').style.display = 'none';
+        document.getElementById('archiveCount').textContent = '';
+        return;
+      }
+      showMore();
+    }
+
+    // Load all stories from index
+    fetch('../stories.json?v=' + Date.now())
+      .then(r => r.json())
+      .then(data => {
+        allStories = data || [];
+        filtered = allStories;
+        showMore();
+      })
+      .catch(() => {
+        document.getElementById('archiveGrid').innerHTML = '<div class="no-results">Could not load stories. Try refreshing.</div>';
+      });
+
+    document.getElementById('loadMoreBtn').addEventListener('click', showMore);
+
+    let searchTimer;
+    document.getElementById('searchInput').addEventListener('input', function() {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => applySearch(this.value), 200);
+    });
+  </script>
+</body>
+</html>
