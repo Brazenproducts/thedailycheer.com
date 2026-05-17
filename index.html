@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css?v=8" />
+  <link rel="stylesheet" href="style.css?v=9" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 </head>
 <body>
@@ -72,22 +72,19 @@
 
   <!-- ===== STICKY FILTER BAR ===== -->
   <div class="filter-bar" id="filterBar">
-    <div class="filter-scroll">
-      <div class="filter-group region-group">
-        <button class="filter-tab active" data-region="all">🌎 All</button>
-        <button class="filter-tab" data-region="us">🇺🇸 US</button>
-        <button class="filter-tab" data-region="world">🌍 World</button>
-      </div>
-      <div class="filter-divider"></div>
-      <div class="filter-group cat-group">
-        <button class="cat-pill" data-filter="environment">🌿 Environment</button>
-        <button class="cat-pill" data-filter="science">🔬 Science</button>
-        <button class="cat-pill" data-filter="animals">🐾 Animals</button>
-        <button class="cat-pill" data-filter="community">🏘️ Community</button>
-        <button class="cat-pill" data-filter="humans">❤️ People</button>
-        <button class="cat-pill" data-filter="funny">😂 Funny</button>
-        <button class="cat-pill" data-filter="sports">🏆 Sports</button>
-      </div>
+    <div class="filter-row region-row">
+      <button class="filter-tab active" data-region="all">🌎 All</button>
+      <button class="filter-tab" data-region="us">🇺🇸 US</button>
+      <button class="filter-tab" data-region="world">🌍 World</button>
+    </div>
+    <div class="filter-row cat-row">
+      <button class="cat-pill" data-filter="environment">🌿 Environment</button>
+      <button class="cat-pill" data-filter="science">🔬 Science</button>
+      <button class="cat-pill" data-filter="animals">🐾 Animals</button>
+      <button class="cat-pill" data-filter="community">🏘️ Community</button>
+      <button class="cat-pill" data-filter="humans">❤️ People</button>
+      <button class="cat-pill" data-filter="funny">😂 Funny</button>
+      <button class="cat-pill" data-filter="sports">🏆 Sports</button>
     </div>
   </div>
 
