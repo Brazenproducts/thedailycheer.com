@@ -11,12 +11,13 @@ function renderStories(stories) {
     var isFeatured = featured && i === 0;
     var isFunny = s.category === 'funny';
     var classes = 'story-card' + (isFeatured ? ' card-featured' : '') + (isFunny ? ' card-funny' : '');
+    var region = s.region || 'world';
     var badge = isFeatured ? '<div class="card-badge">⭐ Featured Story</div>' :
                 isFunny   ? '<div class="card-badge funny-badge">😂 Funny</div>' : '';
     var catLabel = (s.category || 'good-news').replace(/-/g,' ').replace(/\w/g, function(c){return c.toUpperCase();});
     var smiles = s.smileCount || Math.floor(Math.random()*800 + 50);
 
-    html += '<article class="' + classes + '" data-category="' + (s.category||'good-news') + '" style="cursor:pointer;" onclick="window.open(\'' + s.link + '\',\'_blank\',\'noopener\')">' +
+    html += '<article class="' + classes + '" data-category="' + (s.category||'good-news') + '" data-region="' + region + '" style="cursor:pointer;" onclick="window.open(\'' + s.link + '\',\'_blank\',\'noopener\')">' +
       badge +
       '<div class="card-media">' +
         '<img src="' + s.imageUrl + '" alt="' + (s.imageAlt||'') + '" loading="lazy" ' +
@@ -173,27 +174,38 @@ function initSmileButtons() {
   });
 }
 
-/* ---------- Category Filter Pills ---------- */
-function initCategoryFilter() {
-  const pills = document.querySelectorAll('.cat-pill');
+/* ---------- Category + Region Filters ---------- */
+let activeRegion = 'all';
+let activeCategory = 'all';
+
+function applyFilters() {
   const cards = document.querySelectorAll('.story-card');
+  cards.forEach(card => {
+    const catMatch = activeCategory === 'all' || card.dataset.category === activeCategory;
+    const regionMatch = activeRegion === 'all' || card.dataset.region === activeRegion;
+    card.style.display = (catMatch && regionMatch) ? '' : 'none';
+    card.style.opacity = '1';
+  });
+}
 
-  pills.forEach(pill => {
+function initCategoryFilter() {
+  // Category pills
+  document.querySelectorAll('.cat-pill').forEach(pill => {
     pill.addEventListener('click', () => {
-      pills.forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
-      const filter = pill.dataset.filter;
+      activeCategory = pill.dataset.filter;
+      applyFilters();
+    });
+  });
 
-      cards.forEach(card => {
-        if (filter === 'all' || card.dataset.category === filter) {
-          card.style.display = '';
-          card.style.opacity = '1';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-
-      document.getElementById('today')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Region tabs
+  document.querySelectorAll('.filter-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      activeRegion = tab.dataset.region;
+      applyFilters();
     });
   });
 }

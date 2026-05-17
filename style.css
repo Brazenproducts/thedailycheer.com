@@ -260,6 +260,63 @@ main { padding: 40px 0 20px; margin-top: 20px; }
 .category-grid {
   display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px;
 }
+
+/* ===== STICKY FILTER BAR ===== */
+.filter-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+.filter-scroll {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 10px 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.filter-scroll::-webkit-scrollbar { display: none; }
+.filter-group {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.filter-divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border);
+  margin: 0 12px;
+  flex-shrink: 0;
+}
+.filter-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 14px;
+  border-radius: 100px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text-2);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .15s;
+  flex-shrink: 0;
+}
+.filter-tab:hover { border-color: var(--yellow); color: var(--text); }
+.filter-tab.active {
+  background: var(--text);
+  border-color: var(--text);
+  color: #fff;
+}
+
 .cat-pill {
   padding: 10px 20px; border-radius: 100px;
   border: 2px solid var(--border); background: var(--surface);

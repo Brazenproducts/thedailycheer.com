@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css?v=5" />
+  <link rel="stylesheet" href="style.css?v=6" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 </head>
 <body>
@@ -74,6 +74,28 @@
     <div class="ticker-track" id="tickerTrack"><span>Loading today\'s good news...</span></div>
   </div>
 
+  <!-- ===== STICKY FILTER BAR ===== -->
+  <div class="filter-bar" id="filterBar">
+    <div class="filter-scroll">
+      <div class="filter-group region-group">
+        <button class="filter-tab active" data-region="all">🌎 All</button>
+        <button class="filter-tab" data-region="us">🇺🇸 National</button>
+        <button class="filter-tab" data-region="world">🌍 World</button>
+      </div>
+      <div class="filter-divider"></div>
+      <div class="filter-group cat-group">
+        <button class="cat-pill active" data-filter="all">✨ All</button>
+        <button class="cat-pill" data-filter="environment">🌿 Environment</button>
+        <button class="cat-pill" data-filter="science">🔬 Science</button>
+        <button class="cat-pill" data-filter="animals">🐾 Animals</button>
+        <button class="cat-pill" data-filter="community">🏘️ Community</button>
+        <button class="cat-pill" data-filter="humans">❤️ People</button>
+        <button class="cat-pill" data-filter="funny">😂 Funny</button>
+        <button class="cat-pill" data-filter="sports">🏆 Sports</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ===== TODAY'S STORIES ===== -->
   <main id="today">
     <div class="container section-header">
@@ -93,24 +115,7 @@
     </div>
   </main>
 
-  <!-- ===== CATEGORIES ===== -->
-  <section class="categories-section" id="categories" aria-labelledby="cat-heading">
-    <div class="container">
-      <h2 id="cat-heading">Browse by Mood</h2>
-      <p class="section-sub">Find exactly the kind of good you need right now.</p>
-      <div class="category-grid">
-        <button class="cat-pill active" data-filter="all">✨ All Good News</button>
-        <button class="cat-pill" data-filter="environment">🌿 Environment</button>
-        <button class="cat-pill" data-filter="science">🔬 Science</button>
-        <button class="cat-pill" data-filter="animals">🐾 Animals</button>
-        <button class="cat-pill" data-filter="community">🏘️ Community</button>
-        <button class="cat-pill" data-filter="humans">❤️ People</button>
-        <button class="cat-pill" data-filter="funny">😂 Funny</button>
-        <button class="cat-pill" data-filter="kids">👦 Kids</button>
-        <button class="cat-pill" data-filter="sports">🏆 Sports</button>
-      </div>
-    </div>
-  </section>
+  
 
   <!-- ===== QUOTE OF THE DAY ===== -->
   <section class="quote-section" aria-label="Quote of the day">
@@ -278,6 +283,6 @@
     </div>
   </div>
   <!-- ===== END ZEN LOFI WIDGET ===== -->
-  <script src="app.js?v=7"></script>
+  <script src="app.js?v=8"></script>
 </body>
 </html>
