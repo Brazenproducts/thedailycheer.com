@@ -41,12 +41,13 @@
     "source": "wire",
     "region": "us",
     "category": "good-news",
-    "imageUrl": "https://live.staticflickr.com/3368/3626874675_bb18a60998_b.jpg",
-    "imageAlt": "Bald eagle in flight",
+    "imageUrl": "https://www.popsci.com/wp-content/uploads/2026/05/jackie-shadow-sandy-luna-2026.png?quality=85&w=1200",
+    "imageAlt": "Sandy and Luna, eaglets of Jackie and Shadow, looking very grown up",
     "dateMs": 1778962500000,
     "dateStr": "May 16, 2026",
     "aiHeadline": "Baby Eagles Jackie and Shadow Are Learning to Fly and We're Obsessed",
-    "internalUrl": "/stories/jackie-and-shadows-eaglets-practice-stomping-and-flapping.html"
+    "internalUrl": "/stories/jackie-and-shadows-eaglets-practice-stomping-and-flapping.html",
+    "imageCredit": "Photo: Popular Science"
   },
   {
     "id": "story-aHR0cHM6Ly93",
