@@ -26,7 +26,7 @@ function renderStories(stories) {
       '</div>' +
       '<div class="card-body">' +
         '<span class="card-tag">' + catLabel + '</span>' +
-        '<h3><a href="' + s.link + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;" onclick="event.stopPropagation()">' + s.title + '</a></h3>' +
+        '<h3><a href="' + (s.internalUrl || s.link || '#') + '" style="color:inherit;text-decoration:none;" onclick="event.stopPropagation()">' + (s.aiHeadline || s.title) + '</a></h3>' +
         (s.description ? '<p>' + s.description.slice(0,160) + (s.description.length>160?'…':'') + '</p>' : '') +
         '<div class="card-footer">' +
           '' +
