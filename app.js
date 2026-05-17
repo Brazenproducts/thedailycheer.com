@@ -182,10 +182,17 @@ function applyFilters() {
   const cards = document.querySelectorAll('.story-card');
   cards.forEach(card => {
     const catMatch = activeCategory === 'all' || card.dataset.category === activeCategory;
-    const regionMatch = activeRegion === 'all' || card.dataset.region === activeRegion;
-    card.style.display = (catMatch && regionMatch) ? '' : 'none';
-    card.style.opacity = '1';
+    const regionMatch = activeRegion === 'all' || (card.dataset.region || 'world') === activeRegion;
+    const show = catMatch && regionMatch;
+    card.style.display = show ? 'block' : 'none';
+    card.style.opacity = show ? '1' : '';
+    card.style.transform = show ? 'translateY(0)' : '';
   });
+  // Fix featured card display — it uses different layout
+  const featured = document.querySelector('.card-featured');
+  if (featured && featured.style.display === 'block') {
+    featured.style.display = '';
+  }
 }
 
 function initCategoryFilter() {
