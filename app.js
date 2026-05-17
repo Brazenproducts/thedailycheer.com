@@ -391,6 +391,17 @@ function initChillZone() {
   }
 
   if (npStop) npStop.addEventListener('click', function() { stopAll(); hideNowPlaying(); });
+
+  // Tab-switch toggle
+  var tabToggleEl = document.getElementById('tabToggle');
+  if (tabToggleEl) {
+    updateTabToggle();
+    tabToggleEl.addEventListener('change', function() {
+      keepPlayingOnTabSwitch = tabToggleEl.checked;
+      localStorage.setItem('tdc-keepplaying', keepPlayingOnTabSwitch ? 'true' : 'false');
+      updateTabToggle();
+    });
+  }
   if (npOpen) npOpen.addEventListener('click', function() { panel.classList.add('open'); });
 
   // Tabs
@@ -408,8 +419,39 @@ function initChillZone() {
   var currentNatureBtn = null;
   var currentNatureAudio = null;
 
+  // Tab visibility preference — persist across page loads
+  var keepPlayingOnTabSwitch = localStorage.getItem('tdc-keepplaying') === 'true';
+
+  function updateTabToggle() {
+    var tog = document.getElementById('tabToggle');
+    var lab = document.getElementById('tabToggleLabel');
+    if (!tog) return;
+    tog.checked = keepPlayingOnTabSwitch;
+    if (lab) lab.textContent = keepPlayingOnTabSwitch ? 'Playing in background' : 'Pauses on tab switch';
+  }
+
+  // Page Visibility API — pause/resume based on preference
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+      if (!keepPlayingOnTabSwitch) {
+        if (currentNatureAudio && !currentNatureAudio.paused) {
+          currentNatureAudio._wasPlaying = true;
+          currentNatureAudio.pause();
+        }
+        var frame = document.getElementById('ytFrame');
+        if (frame && frame.src.includes('autoplay=1')) frame._wasPlaying = true;
+      }
+    } else {
+      // Tab came back — resume if we paused it
+      if (currentNatureAudio && currentNatureAudio._wasPlaying) {
+        currentNatureAudio._wasPlaying = false;
+        currentNatureAudio.play().catch(function(){});
+      }
+    }
+  });
+
   function stopAll() {
-    if (currentNatureAudio) { currentNatureAudio.pause(); currentNatureAudio.currentTime = 0; }
+    if (currentNatureAudio) { currentNatureAudio.pause(); currentNatureAudio.currentTime = 0; currentNatureAudio._wasPlaying = false; }
     if (currentNatureBtn) currentNatureBtn.classList.remove('playing');
     currentNatureBtn = null; currentNatureAudio = null;
     var frame = document.getElementById('ytFrame');
