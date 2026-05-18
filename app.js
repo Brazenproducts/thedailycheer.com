@@ -196,6 +196,10 @@ function applyFilters() {
 }
 
 function initCategoryFilter() {
+  // Prevent double-binding — only attach listeners once
+  if (initCategoryFilter._done) return;
+  initCategoryFilter._done = true;
+
   // Category pills
   document.querySelectorAll('.cat-pill').forEach(pill => {
     pill.addEventListener('click', () => {
