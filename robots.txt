@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://thedailycheer.com/sitemap.xml
