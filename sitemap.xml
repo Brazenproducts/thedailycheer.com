@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://thedailycheer.com/about.html</loc><lastmod>2026-06-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://thedailycheer.com/best-for-beginners-dailycheer-2026.html</loc><lastmod>2026-06-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://thedailycheer.com/best-thedailycheer-2026.html</loc><lastmod>2026-06-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://thedailycheer.com/buying-guide-dailycheer-2026.html</loc><lastmod>2026-06-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://thedailycheer.com/comparison-dailycheer-2026.html</loc><lastmod>2026-06-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://thedailycheer.com/how-to-clean-dailycheer-2026.html</loc><lastmod>2026-06-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://thedailycheer.com/</loc><lastmod>2026-06-07</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://thedailycheer.com/privacy.html</loc><lastmod>2026-06-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://thedailycheer.com/thedailycheer-buyers-handbook-2026.html</loc><lastmod>2026-06-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://thedailycheer.com/thedailycheer-buying-guide-2026.html</loc><lastmod>2026-06-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://thedailycheer.com/thedailycheer-explained-2026.html</loc><lastmod>2026-06-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://thedailycheer.com/thedailycheer-reviewed-2026.html</loc><lastmod>2026-06-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://thedailycheer.com/thedailycheer-tested-ranked-2026.html</loc><lastmod>2026-06-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://thedailycheer.com/thedailycheer-what-buyers-need-2026.html</loc><lastmod>2026-06-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://thedailycheer.com/thedailycheer-what-wed-buy-2026.html</loc><lastmod>2026-06-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://thedailycheer.com/what-we-look-for-thedailycheer-2026.html</loc><lastmod>2026-06-07</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url>
+    <loc>https://thedailycheer.com/</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
 </urlset>
