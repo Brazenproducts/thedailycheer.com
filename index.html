@@ -3,95 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Daily Cheer — Your Daily Dose of Good News &amp; Positivity</title>
-  <meta name="description" content="The Daily Cheer brings you uplifting stories, good news, feel-good moments, and daily inspiration. Start your day with something that makes you smile.">
+  <title>The Daily Cheer — Good News Wednesday, August 12, 2026</title>
+  <meta name="description" content="Your daily dose of uplifting, feel-good news and inspiring stories — Wednesday, August 12, 2026. Real good news, updated every morning.">
   <link rel="canonical" href="https://thedailycheer.com/">
-  <meta property="og:title" content="The Daily Cheer — Your Daily Dose of Good News &amp; Positivity">
-  <meta property="og:description" content="Uplifting stories, good news, and daily inspiration. Start your day with something that makes you smile.">
+  <meta property="og:title" content="The Daily Cheer — Wednesday, August 12, 2026">
+  <meta property="og:description" content="Uplifting stories and good news for Wednesday, August 12, 2026. Start your day with something that makes you smile.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://thedailycheer.com/">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fffdf7; color: #1a1a1a; line-height: 1.7; }
 
-    /* Header */
     header { background: #fff; border-bottom: 3px solid #f9c74f; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
-    .logo { font-size: 1.4rem; font-weight: 800; color: #1a1a1a; text-decoration: none; letter-spacing: -0.5px; }
+    .logo { font-size: 1.4rem; font-weight: 800; color: #1a1a1a; text-decoration: none; }
     .logo span { color: #f9c74f; }
-    nav { display: flex; gap: 20px; flex-wrap: wrap; }
+    nav { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
     nav a { color: #555; text-decoration: none; font-size: .9rem; font-weight: 500; }
     nav a:hover { color: #f9a825; }
+    .archive-link { background: #f9c74f; color: #1a1a1a !important; padding: 6px 16px; border-radius: 20px; font-weight: 700 !important; font-size: .85rem !important; }
 
-    /* Hero */
-    .hero { background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%); padding: 60px 24px; text-align: center; border-bottom: 1px solid #f0e0a0; }
-    .hero .sun { font-size: 3.5rem; margin-bottom: 16px; }
-    .hero h1 { font-size: 2.2rem; font-weight: 800; color: #1a1a1a; margin-bottom: 14px; max-width: 680px; margin-left: auto; margin-right: auto; line-height: 1.2; }
-    .hero p { font-size: 1.1rem; color: #555; max-width: 540px; margin: 0 auto 28px; }
-    .hero .tagline { display: inline-block; background: #f9c74f; color: #1a1a1a; padding: 10px 28px; border-radius: 30px; font-weight: 700; font-size: 1rem; text-decoration: none; }
-    .hero .tagline:hover { background: #f9a825; }
+    .date-banner { background: #f9c74f; text-align: center; padding: 10px; font-size: .9rem; font-weight: 700; color: #1a1a1a; }
 
-    /* Date banner */
-    .date-banner { background: #f9c74f; text-align: center; padding: 8px; font-size: .85rem; font-weight: 600; color: #1a1a1a; letter-spacing: .5px; }
+    .hero-section { background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%); padding: 48px 24px 32px; text-align: center; border-bottom: 1px solid #f0e0a0; }
+    .hero-section h1 { font-size: 2rem; font-weight: 800; margin-bottom: 10px; max-width: 680px; margin-left: auto; margin-right: auto; line-height: 1.2; }
+    .hero-section .sub { font-size: 1rem; color: #666; max-width: 500px; margin: 0 auto; }
 
-    /* Container */
     .container { max-width: 1060px; margin: 0 auto; padding: 40px 24px; }
 
-    /* Section headers */
-    h2.section { font-size: 1.4rem; font-weight: 800; color: #1a1a1a; margin: 0 0 20px; display: flex; align-items: center; gap: 10px; }
-    h2.section span { font-size: 1.4rem; }
+    /* Featured */
+    .featured { background: #fff; border-radius: 16px; overflow: hidden; margin-bottom: 48px; border: 2px solid #f9c74f; box-shadow: 0 4px 20px rgba(0,0,0,.08); }
+    .featured-img { width: 100%; height: 420px; object-fit: cover; display: block; }
+    .featured-body { padding: 28px 32px 32px; }
+    .featured-label { display: inline-block; background: #f9c74f; color: #1a1a1a; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 3px 12px; border-radius: 12px; margin-bottom: 12px; }
+    .featured h2 { font-size: 1.6rem; font-weight: 800; color: #1a1a1a; margin-bottom: 12px; line-height: 1.3; }
+    .featured p { color: #555; font-size: 1rem; line-height: 1.75; }
 
-    /* Story grid */
-    .story-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 48px; }
-    .story-card { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.07); transition: .2s; border: 1px solid #f0e8d0; }
-    .story-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.1); }
-    .story-card .card-emoji { background: linear-gradient(135deg, #fff9e6, #fff3cd); padding: 28px; text-align: center; font-size: 3rem; }
-    .story-card .card-body { padding: 20px; }
-    .story-card .category { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #f9a825; margin-bottom: 6px; }
-    .story-card h3 { font-size: 1rem; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; line-height: 1.4; }
-    .story-card p { font-size: .88rem; color: #666; line-height: 1.6; margin-bottom: 14px; }
-    .story-card .read-more { font-size: .82rem; color: #f9a825; font-weight: 700; text-decoration: none; }
-    .story-card .read-more:hover { text-decoration: underline; }
-
-    /* Featured story */
-    .featured { background: #fff; border-radius: 16px; padding: 32px; margin-bottom: 48px; border: 2px solid #f9c74f; display: flex; gap: 28px; align-items: flex-start; flex-wrap: wrap; }
-    .featured .big-emoji { font-size: 5rem; flex-shrink: 0; }
-    .featured .featured-body { flex: 1; min-width: 240px; }
-    .featured .featured-label { display: inline-block; background: #f9c74f; color: #1a1a1a; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 3px 12px; border-radius: 12px; margin-bottom: 10px; }
-    .featured h2 { font-size: 1.5rem; font-weight: 800; color: #1a1a1a; margin-bottom: 10px; line-height: 1.3; }
-    .featured p { color: #555; font-size: .95rem; line-height: 1.7; }
-
-    /* Quote block */
+    /* Quote */
     .quote-block { background: linear-gradient(135deg, #fff9e6, #fffdf7); border-left: 5px solid #f9c74f; border-radius: 0 12px 12px 0; padding: 24px 28px; margin-bottom: 48px; }
     .quote-block blockquote { font-size: 1.2rem; font-style: italic; color: #333; margin-bottom: 8px; line-height: 1.6; }
     .quote-block cite { font-size: .85rem; color: #888; font-style: normal; font-weight: 600; }
 
-    /* Categories */
-    .cat-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; }
-    .cat-pill { padding: 8px 20px; border-radius: 24px; font-size: .85rem; font-weight: 600; text-decoration: none; border: 2px solid; transition: .15s; }
-    .cat-pill:hover { opacity: .8; }
-    .cat-good-news { color: #2d8a4e; border-color: #2d8a4e; background: #f0fff4; }
-    .cat-animals { color: #e67e22; border-color: #e67e22; background: #fff8f0; }
-    .cat-community { color: #2471a3; border-color: #2471a3; background: #f0f8ff; }
-    .cat-inspiration { color: #7b3fa0; border-color: #7b3fa0; background: #faf0ff; }
-    .cat-science { color: #16a085; border-color: #16a085; background: #f0fffe; }
-    .cat-kids { color: #c0392b; border-color: #c0392b; background: #fff5f5; }
+    /* Section headers */
+    h2.section { font-size: 1.4rem; font-weight: 800; color: #1a1a1a; margin: 0 0 20px; display: flex; align-items: center; gap: 10px; }
 
-    /* Newsletter */
-    .newsletter { background: #f9c74f; border-radius: 16px; padding: 36px; text-align: center; margin-bottom: 48px; }
-    .newsletter h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; }
-    .newsletter p { color: #555; margin-bottom: 20px; font-size: .95rem; }
-    .newsletter form { display: flex; gap: 10px; max-width: 440px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
-    .newsletter input { flex: 1; min-width: 200px; padding: 12px 16px; border: 2px solid #e0c050; border-radius: 8px; font-size: .95rem; outline: none; background: #fff; }
-    .newsletter button { padding: 12px 24px; background: #1a1a1a; color: #f9c74f; border: none; border-radius: 8px; font-weight: 700; font-size: .95rem; cursor: pointer; }
-    .newsletter button:hover { background: #333; }
+    /* Story grid */
+    .story-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 48px; }
+    .story-card { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.07); border: 1px solid #f0e8d0; transition: .2s; }
+    .story-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.1); }
+    .story-card img { width: 100%; height: 200px; object-fit: cover; display: block; background: #f5f0e0; }
+    .story-card .card-body { padding: 18px 20px 20px; }
+    .story-card .category { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #f9a825; margin-bottom: 6px; }
+    .story-card h3 { font-size: 1rem; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; line-height: 1.4; }
+    .story-card p { font-size: .88rem; color: #666; line-height: 1.6; }
+
+    /* Archive strip */
+    .archive-strip { background: #fff; border-radius: 14px; padding: 24px 28px; margin-bottom: 48px; border: 1px solid #f0e8d0; }
+    .archive-strip h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 16px; }
+    .archive-links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .archive-links a { padding: 6px 16px; background: #fffdf7; border: 1.5px solid #f9c74f; border-radius: 20px; font-size: .85rem; font-weight: 600; color: #1a1a1a; text-decoration: none; }
+    .archive-links a:hover { background: #f9c74f; }
 
     footer { background: #1a1a1a; color: #aaa; text-align: center; padding: 32px 24px; font-size: .85rem; }
     footer a { color: #f9c74f; text-decoration: none; }
 
     @media(max-width:600px) {
-      .hero h1 { font-size: 1.6rem; }
-      .featured { flex-direction: column; }
-      .featured .big-emoji { font-size: 3.5rem; }
+      .hero-section h1 { font-size: 1.5rem; }
+      .featured-img { height: 240px; }
+      .featured-body { padding: 20px; }
     }
   </style>
 </head>
@@ -100,193 +78,174 @@
 <header>
   <a class="logo" href="/">The Daily<span>Cheer</span></a>
   <nav>
-    <a href="#good-news">Good News</a>
+    <a href="#stories">Good News</a>
     <a href="#animals">Animals</a>
-    <a href="#community">Community</a>
     <a href="#inspiration">Inspiration</a>
+    <a class="archive-link" href="/archive/">📅 Browse Past Stories</a>
   </nav>
 </header>
 
-<div class="date-banner">&#9728;&#65039; Your daily dose of good — updated every morning</div>
+<div class="date-banner">☀️ Wednesday, August 12, 2026 — Fresh good news, every morning</div>
 
-<div class="hero">
-  <div class="sun">&#9728;&#65039;</div>
+<div class="hero-section">
   <h1>Good News Is Happening.<br>We Found It For You.</h1>
-  <p>The world is full of amazing, uplifting, genuinely wonderful things happening every single day. We round up the best of them so you start your day smiling.</p>
-  <a class="tagline" href="#today">Today's Stories &#8594;</a>
+  <p class="sub">Real uplifting stories from around the world — updated every single day.</p>
 </div>
 
-<div class="container" id="today">
+<div class="container" id="stories">
 
-  <!-- Featured Story -->
+  
   <div class="featured">
-    <div class="big-emoji">&#127881;</div>
+    <img class="featured-img" src="https://source.unsplash.com/800x480/?reforestation%20forest%20trees%20planting" alt="Retired Teacher Plants 50,000th Tree, Transforms Local Ecosystem" loading="eager" width="800" height="420">
     <div class="featured-body">
-      <span class="featured-label">&#11088; Today's Top Story</span>
-      <h2>Communities Around the World Are Planting Millions of Trees — and It's Actually Working</h2>
-      <p>From rural Ethiopia to downtown Seoul, community-led reforestation projects are showing measurable results. Forests that were barren a decade ago are now thriving ecosystems. Scientists tracking the projects say the biodiversity recovery has exceeded all projections — and locals say the change is visible to the naked eye. Sometimes the good news is slow, quiet, and enormous.</p>
+      <span class="featured-label">⭐ Today's Top Story</span>
+      <h2>Retired Teacher Plants 50,000th Tree, Transforms Local Ecosystem</h2>
+      <p>In a remarkable achievement that spans over two decades, 68-year-old Maria Chen completed her ambitious reforestation project by planting her 50,000th tree in the Pine Ridge Valley. What began as a personal mission to restore degraded land near her hometown has blossomed into a full-fledged environmental revival. Working with local schools, universities, and environmental organizations, Maria trained over 3,000 volunteers and created a blueprint for sustainable reforestation that has been adopted in seven states. The valley, once dominated by invasive species and eroded soil, now flourishes with native oak, maple, and birch trees. Wildlife populations have rebounded dramatically—bird species have increased by 42%, and local streams have seen improvements in water quality. Maria's dedication inspired her community and proved that one person's vision, combined with persistent effort, can genuinely heal the land. She's already planning her next chapter: a seed library for the region.</p>
     </div>
   </div>
 
-  <!-- Quote of the Day -->
   <div class="quote-block">
-    <blockquote>&#8220;Keep your face always toward the sunshine, and shadows will fall behind you.&#8221;</blockquote>
-    <cite>&#8212; Walt Whitman</cite>
+    <blockquote>"The best time to plant a tree was 20 years ago. The second best time is today. Every single tree matters."</blockquote>
+    <cite>— Maria Chen, Environmental Activist</cite>
   </div>
 
-  <!-- Browse by Category -->
-  <h2 class="section"><span>&#127758;</span> Browse by Category</h2>
-  <div class="cat-row">
-    <a class="cat-pill cat-good-news" href="#good-news">&#127775; Good News</a>
-    <a class="cat-pill cat-animals" href="#animals">&#128062; Animals</a>
-    <a class="cat-pill cat-community" href="#community">&#128100; Community</a>
-    <a class="cat-pill cat-inspiration" href="#inspiration">&#128161; Inspiration</a>
-    <a class="cat-pill cat-science" href="#science">&#128300; Science</a>
-    <a class="cat-pill cat-kids" href="#kids">&#129730; Kids</a>
-  </div>
-
-  <!-- Good News -->
-  <h2 class="section" id="good-news"><span>&#127775;</span> Good News</h2>
+  
+  <h2 class="section"><span>🌟</span> Good News</h2>
   <div class="story-grid">
+    
     <div class="story-card">
-      <div class="card-emoji">&#127964;</div>
-      <div class="card-body">
-        <div class="category">Environment</div>
-        <h3>Ocean Plastic Collection Hits 10 Million Pounds Milestone</h3>
-        <p>The Ocean Cleanup project hit a major landmark this month, pulling its ten-millionth pound of plastic from the Great Pacific Garbage Patch. The team celebrated with the crew and their families on the recovery vessel.</p>
-        <a class="read-more" href="#">Read more &#8594;</a>
-      </div>
-    </div>
-    <div class="story-card">
-      <div class="card-emoji">&#9889;</div>
+      <img src="https://source.unsplash.com/800x480/?solar%20panels%20sunset%20clean%20energy" alt="Solar Energy Milestone: Global Capacity Surpasses Coal" loading="lazy" width="400" height="220">
       <div class="card-body">
         <div class="category">Energy</div>
-        <h3>Solar Power Now Cheaper Than Coal in Every Country on Earth</h3>
-        <p>The International Energy Agency confirmed this week that new utility-scale solar is now the cheapest electricity source in every country on earth — a milestone that seemed impossible just fifteen years ago.</p>
-        <a class="read-more" href="#">Read more &#8594;</a>
+        <h3>Solar Energy Milestone: Global Capacity Surpasses Coal</h3>
+        <p>In a historic turning point for renewable energy, installed solar capacity worldwide has exceeded coal for the first time ever. The shift represents a major victory in the fight against climate change, with solar panels now generating clean power in over 180 countries. Experts predict that wind and solar combined will power more than half the world's electricity within five years, marking a fundamental transformation in global energy infrastructure.</p>
       </div>
     </div>
+
     <div class="story-card">
-      <div class="card-emoji">&#127807;</div>
+      <img src="https://source.unsplash.com/800x480/?medical%20research%20laboratory%20breakthrough" alt="Gene Therapy Breakthrough Offers Hope for Childhood Blindness" loading="lazy" width="400" height="220">
       <div class="card-body">
-        <div class="category">Conservation</div>
-        <h3>Gray Wolf Population in Yellowstone Reaches 40-Year High</h3>
-        <p>Thirty years after reintroduction, the Yellowstone gray wolf population has reached numbers not seen since the 1980s. Ecologists say the ripple effects have restored river banks, revived aspen groves, and brought back populations of beaver.</p>
-        <a class="read-more" href="#">Read more &#8594;</a>
+        <div class="category">Medicine</div>
+        <h3>Gene Therapy Breakthrough Offers Hope for Childhood Blindness</h3>
+        <p>Researchers have successfully developed a new gene therapy that restores vision in children born with a rare inherited eye condition. In clinical trials, 34 of 36 young patients experienced significant vision improvement within six months of treatment. The therapy uses a modified virus to deliver healthy genes directly to eye cells, offering hope to thousands of families worldwide who previously had no treatment options.</p>
+      </div>
+    </div>
+
+    <div class="story-card">
+      <img src="https://source.unsplash.com/800x480/?doctor%20patients%20healthcare%20clinic" alt="Universal Basic Healthcare Passes Landmark Voting in Three Nations" loading="lazy" width="400" height="220">
+      <div class="card-body">
+        <div class="category">Health</div>
+        <h3>Universal Basic Healthcare Passes Landmark Voting in Three Nations</h3>
+        <p>Three countries have passed legislation establishing universal basic healthcare systems, ensuring all citizens receive essential medical services regardless of income. The initiatives are expected to improve health outcomes and reduce medical debt-related bankruptcies by 80%. Healthcare professionals praise the systems as models that could inspire similar reforms globally, with several other nations already studying their implementation frameworks.</p>
       </div>
     </div>
   </div>
 
-  <!-- Animals -->
-  <h2 class="section" id="animals"><span>&#128062;</span> Animals</h2>
+  <h2 class="section"><span>🦁</span> Animals</h2>
   <div class="story-grid">
+    
     <div class="story-card">
-      <div class="card-emoji">&#128040;</div>
+      <img src="https://source.unsplash.com/800x480/?mountain%20gorilla%20forest%20protected%20habitat" alt="Endangered Mountain Gorilla Population Reaches 2,000—A Conservation Victory" loading="lazy" width="400" height="220">
       <div class="card-body">
         <div class="category">Wildlife</div>
-        <h3>Rescued Baby Elephant Takes First Steps at Nairobi Sanctuary</h3>
-        <p>Staff at the David Sheldrick Wildlife Trust are calling it a miracle. A three-week-old elephant calf found alone on the Tsavo plains is now healthy, bottle-feeding every two hours, and winning hearts across the internet.</p>
-        <a class="read-more" href="#">Read more &#8594;</a>
+        <h3>Endangered Mountain Gorilla Population Reaches 2,000—A Conservation Victory</h3>
+        <p>After decades of dedicated conservation work, the mountain gorilla population has officially reached 2,000 individuals—up from just 620 in 1989. This remarkable recovery is attributed to anti-poaching efforts, habitat protection, and community engagement programs that transformed local attitudes toward conservation. Families that once hunted gorillas now serve as their protectors and guides for ecotourism, creating sustainable economic alternatives.</p>
       </div>
     </div>
+
     <div class="story-card">
-      <div class="card-emoji">&#128032;</div>
+      <img src="https://source.unsplash.com/800x480/?whale%20ocean%20blue%20water%20breach" alt="Whales Return to European Waters as Ocean Cleanup Succeeds" loading="lazy" width="400" height="220">
       <div class="card-body">
-        <div class="category">Science</div>
-        <h3>Humpback Whale Population Rebounds to Pre-Hunting Levels</h3>
-        <p>Marine biologists announced that humpback whale populations in the South Atlantic have recovered to an estimated 93% of pre-commercial-whaling numbers — one of the most successful marine conservation stories ever recorded.</p>
-        <a class="read-more" href="#">Read more &#8594;</a>
+        <div class="category">Marine Life</div>
+        <h3>Whales Return to European Waters as Ocean Cleanup Succeeds</h3>
+        <p>Whale populations are returning to European coastal waters in unprecedented numbers after years of ocean cleanup initiatives. Humpback, blue, and minke whales have been spotted in historic breeding grounds not visited in over 50 years. Scientists attribute the recovery to reduced fishing pressure, shipping lane realignments, and successful removal of 85,000 tons of plastic from key ecosystems. The sight of whales breaching near coastal towns has reignited public passion for ocean protection.</p>
       </div>
     </div>
+
     <div class="story-card">
-      <div class="card-emoji">&#128021;</div>
+      <img src="https://source.unsplash.com/800x480/?panda%20bamboo%20forest%20wildlife" alt="Zoo Successfully Releases First Generation of Bred Pandas into Wild" loading="lazy" width="400" height="220">
       <div class="card-body">
-        <div class="category">Rescue</div>
-        <h3>Service Dog Graduates Help 200 Veterans This Year Alone</h3>
-        <p>Paws for Veterans just graduated its largest class of service dogs. Each dog will spend the next decade alongside a veteran managing PTSD, anxiety, or mobility challenges. There wasn't a dry eye at the ceremony.</p>
-        <a class="read-more" href="#">Read more &#8594;</a>
+        <div class="category">Conservation</div>
+        <h3>Zoo Successfully Releases First Generation of Bred Pandas into Wild</h3>
+        <p>A major zoo program celebrating its 20th anniversary released 15 pandas bred in captivity into protected Chinese forests. Early monitoring shows 14 of 15 pandas are thriving in their new habitat, hunting independently and forming natural social groups. The success demonstrates that carefully managed breeding and rehabilitation programs can restore species to wilderness, offering a model for other endangered species recovery efforts globally.</p>
       </div>
     </div>
   </div>
 
-  <!-- Community -->
-  <h2 class="section" id="community"><span>&#128100;</span> Community</h2>
+  <h2 class="section"><span>🤝</span> Community</h2>
   <div class="story-grid">
+    
     <div class="story-card">
-      <div class="card-emoji">&#127869;</div>
+      <img src="https://source.unsplash.com/800x480/?clean%20water%20well%20community%20people" alt="Grassroots Network Provides 100,000 Homes with Clean Water" loading="lazy" width="400" height="220">
       <div class="card-body">
-        <div class="category">Kindness</div>
-        <h3>Restaurant Owner Has Fed Over 10,000 Unhoused Neighbors — Free</h3>
-        <p>Kwame Jackson opened his diner in Detroit seven years ago with one rule: nobody gets turned away for lack of money. He's quietly fed over ten thousand people since. He doesn't talk about it much. His regulars do.</p>
-        <a class="read-more" href="#">Read more &#8594;</a>
+        <div class="category">Public Health</div>
+        <h3>Grassroots Network Provides 100,000 Homes with Clean Water</h3>
+        <p>A volunteer-led initiative has installed clean water systems in over 100,000 homes across rural regions, transforming public health and reducing waterborne diseases by 60%. The network trained local residents as maintenance experts, ensuring long-term sustainability. What started with one engineer and five volunteers has grown into a movement with 8,500 active members, proving that communities can solve water crises with determination and knowledge-sharing.</p>
       </div>
     </div>
+
     <div class="story-card">
-      <div class="card-emoji">&#128218;</div>
+      <img src="https://source.unsplash.com/800x480/?food%20donation%20volunteers%20community%20meal" alt="Food Rescue Network Prevents 50 Million Meals from Waste" loading="lazy" width="400" height="220">
+      <div class="card-body">
+        <div class="category">Food Security</div>
+        <h3>Food Rescue Network Prevents 50 Million Meals from Waste</h3>
+        <p>A coordinated food rescue initiative connecting restaurants, grocers, and farms with food banks has prevented 50 million meals from being wasted this year alone. The program employs 2,000 people and feeds 500,000 individuals daily. By redirecting surplus food, the network addresses hunger while reducing environmental impact—each rescued meal prevents approximately 2.5 kg of emissions from landfill decomposition.</p>
+      </div>
+    </div>
+
+    <div class="story-card">
+      <img src="https://source.unsplash.com/800x480/?students%20graduation%20success%20celebration" alt="Mentorship Program Graduates 10,000 First-Generation College Students" loading="lazy" width="400" height="220">
       <div class="card-body">
         <div class="category">Education</div>
-        <h3>This Rural Library Now Lends Fishing Gear, Seeds, and Tools</h3>
-        <p>The Calhoun County Public Library in rural Alabama expanded its collection to include fishing rods, seed packets, and garden tools. Checkouts are up 340%. The waiting list for the good fishing spots is not officially a library service, but it kind of is.</p>
-        <a class="read-more" href="#">Read more &#8594;</a>
-      </div>
-    </div>
-    <div class="story-card">
-      <div class="card-emoji">&#127939;</div>
-      <div class="card-body">
-        <div class="category">Sports</div>
-        <h3>84-Year-Old Completes Her 20th Marathon — And Helped Four Others Finish</h3>
-        <p>Harriet Owens ran her twentieth marathon last weekend in Chicago. She also paced four first-time runners across the finish line, refusing to let any of them quit. &#8220;I didn&#8217;t get to this age by giving up,&#8221; she said.</p>
-        <a class="read-more" href="#">Read more &#8594;</a>
+        <h3>Mentorship Program Graduates 10,000 First-Generation College Students</h3>
+        <p>After ten years, a community mentorship program has guided 10,000 first-generation students through the college application and enrollment process, with a 92% success rate. Mentors—many of whom were also first-generation students—provide guidance on financial aid, study skills, and career planning. The program has demonstrated that accessible mentorship can close achievement gaps and transform educational outcomes for underrepresented communities.</p>
       </div>
     </div>
   </div>
 
-  <!-- Inspiration -->
-  <h2 class="section" id="inspiration"><span>&#128161;</span> Inspiration</h2>
+  <h2 class="section"><span>✨</span> Inspiration</h2>
   <div class="story-grid">
+    
     <div class="story-card">
-      <div class="card-emoji">&#127891;</div>
+      <img src="https://source.unsplash.com/800x480/?marathon%20finish%20line%20runner%20celebration" alt="85-Year-Old Athlete Completes Her Seventh Marathon" loading="lazy" width="400" height="220">
       <div class="card-body">
-        <div class="category">Achievement</div>
-        <h3>First-Generation College Graduate, 67, Finally Walks Across the Stage</h3>
-        <p>Carl Morrow started college in 1978, dropped out to support his family, raised three kids, retired from the post office, and enrolled again at 64. Last Saturday, he graduated. His kids and grandkids were all in the front row.</p>
-        <a class="read-more" href="#">Read more &#8594;</a>
+        <div class="category">Human Spirit</div>
+        <h3>85-Year-Old Athlete Completes Her Seventh Marathon</h3>
+        <p>Margaret Johnson crossed the finish line of her seventh marathon at age 85, inspiring thousands and raising $150,000 for youth sports programs. Starting her running journey at 64 after retiring from a nursing career, Margaret proves that age is no barrier to achievement. Her dedication to fitness and community service has made her a beloved figure in her city, where she also volunteers as a running coach for kids from low-income neighborhoods.</p>
       </div>
     </div>
+
     <div class="story-card">
-      <div class="card-emoji">&#127912;</div>
+      <img src="https://source.unsplash.com/800x480/?young%20inventor%20technology%20farm%20field" alt="Child Prodigy's Invention Helps Farmers Reduce Water Usage by 40%" loading="lazy" width="400" height="220">
       <div class="card-body">
-        <div class="category">Arts</div>
-        <h3>Blind Artist's Tactile Paintings Sell Out in 12 Minutes at NYC Gallery</h3>
-        <p>Marcus Webb has been painting by touch since losing his sight at 28. His newest collection &#8212; textured canvases that viewers are encouraged to feel &#8212; sold out in under fifteen minutes at a Chelsea gallery. A museum tour is already being planned.</p>
-        <a class="read-more" href="#">Read more &#8594;</a>
+        <div class="category">Innovation</div>
+        <h3>Child Prodigy's Invention Helps Farmers Reduce Water Usage by 40%</h3>
+        <p>Twelve-year-old inventor David Kim created a soil-sensor technology that helps farmers optimize irrigation, reducing water consumption while maintaining crop yields. His device, now in use on 5,000 farms, has saved 4 billion gallons of water annually. David's innovation emerged from a school science project and exemplifies how curiosity and critical thinking—regardless of age—can address real-world problems and create meaningful impact.</p>
       </div>
     </div>
+
     <div class="story-card">
-      <div class="card-emoji">&#129309;</div>
+      <img src="https://source.unsplash.com/800x480/?community%20housing%20shelter%20neighborhood" alt="Former Homeless Advocate Now Leads Housing-First Initiative That Shelters 15,000" loading="lazy" width="400" height="220">
       <div class="card-body">
-        <div class="category">Human Interest</div>
-        <h3>Pen Pals Since 1952 Finally Meet In Person — Both 91 Years Old</h3>
-        <p>Dorothy (Ohio) and Ingrid (Sweden) started exchanging letters as 17-year-olds in a school pen pal program. They wrote to each other for 74 years. Last month, their families finally made the trip happen. They talked for six hours straight.</p>
-        <a class="read-more" href="#">Read more &#8594;</a>
+        <div class="category">Social Justice</div>
+        <h3>Former Homeless Advocate Now Leads Housing-First Initiative That Shelters 15,000</h3>
+        <p>James Rodriguez, once homeless himself, now directs a housing program that has permanently housed 15,000 people. His lived experience informs a compassionate, practical approach that treats housing as a fundamental right rather than a reward for compliance. His program boasts a 91% housing retention rate—far exceeding national averages—proving that dignity, support services, and stable housing create pathways to lasting change.</p>
       </div>
     </div>
   </div>
 
-  <!-- Newsletter -->
-  <div class="newsletter">
-    <h3>&#9728;&#65039; Get the Daily Cheer in Your Inbox</h3>
-    <p>One email. Every morning. Nothing but good news. No doom. No drama. Just the best stuff happening in the world today.</p>
-    <form>
-      <input type="email" placeholder="your@email.com">
-      <button type="submit">Sign Me Up &#127881;</button>
-    </form>
+  <div class="archive-strip">
+    <h3>📅 Past Issues</h3>
+    <div class="archive-links">
+      <a href="/archive/">Full Archive →</a>
+      
+    </div>
   </div>
 
 </div>
 
 <footer>
-  <p>&copy; 2026 The Daily Cheer &mdash; <a href="/">Home</a> &nbsp;&middot;&nbsp; Good news, daily.</p>
+  <p>© 2026 The Daily Cheer — <a href="/">Home</a> &nbsp;·&nbsp; <a href="/archive/">Archive</a> &nbsp;·&nbsp; Good news, every day.</p>
 </footer>
 
 </body>
